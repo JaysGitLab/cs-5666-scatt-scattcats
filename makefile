@@ -20,6 +20,7 @@ HAMCREST_LOCAL = jars/$(HAMCREST_JAR)
 STYLE_XML = misc/appstate_style.xml
 CLASSPATH = -cp .:$(JUNIT_LOCAL)
 CC = javac $(CLASSPATH) -Xlint:deprecation
+
 # Teach make how to use javac to convert between .java and .class
 .SUFFIXES: .java .class
 .java.class:
