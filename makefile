@@ -28,28 +28,22 @@ CC = javac $(CLASSPATH) -Xlint:deprecation
 
 default:
 	@echo "usage: make target"
-	@echo "available targets: compile, test, clean"
+	@echo "available targets: compile, style, clean, test, jars"
 
-compile: javatrix/Matrix.class junit/MatrixTest.class junit/ArithmaticTests.java junit/InPlaceArithmaticTests.java
+compile: scratchGrader/ScratchGrader.class junit/ScratchGraderTest.class
 	@echo "compiled"
 
-junit/MatrixTest.class: $(JUNIT_LOCAL)
-junit/ArithmaticTest.class: $(JUNIT_LOCAL)
-junit/InPlaceArithmaticTest.class: $(JUNIT_LOCAL)
+junit/ScratchGraderTest.class: $(JUNIT_LOCAL)
 
 style:
-	checkstyle -c $(STYLE_XML) junit/MatrixTest.java javatrix/Matrix.java junit/ArithmaticTests.java junit/InPlaceArithmaticTests.java
+	checkstyle -c $(STYLE_XML) junit/ScratchGraderTest.java scratchGrader/ScratchGrader.java
 
 clean:
-	rm -f javatrix/Matrix.class
-	rm -f junit/MatrixTest.class
-	rm -f junit/ArithmaticTests.class
-	rm -f junit/InPlaceArithmaticTests.class
+	rm -f scratchGrader/ScratchGrader.class
+	rm -f junit/ScratchGraderTest.class
 
-test:  javatrix/Matrix.class junit/MatrixTest.class junit/ArithmaticTests.class junit/InPlaceArithmaticTests.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
-	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.MatrixTest
-	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.ArithmaticTests
-	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.InPlaceArithmaticTests
+test:  scratchGrader/ScratchGrader.class junit/ScratchGraderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
+	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.ScratchGraderTest
 
 jars:
 	mkdir jars
