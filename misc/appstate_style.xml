@@ -63,7 +63,7 @@ Checkstyle configuration for CS department at Appalachian State University
 
         <!-- Section 7.[4-9] -->
         <module name="LeftCurly">
-            <property name="option" value="eol"/>
+            <property name="option" value="nl"/>
             <!--<property name="maxLineLength" value="80"/> -->
         </module>
         <module name="RightCurly">
