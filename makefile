@@ -42,7 +42,7 @@ clean:
 	rm -f scratchGrader/ScratchLoader.class
 	rm -f junit/ScratchLoaderTest.class
 
-test: scratchGrader/ScratchLoader.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
+test: scratchGrader/ScratchLoader.class junit/ScratchLoaderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
 	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest
 
 jars:
