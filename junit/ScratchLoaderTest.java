@@ -21,7 +21,7 @@ public class ScratchLoaderTest
     public void testCommandLineParse() 
     {
         String cmdArg = "scratchFiles/my-scratch-file";
-        ScratchLoader loader = new ScratchLoader(cmd_arg);
+        ScratchLoader loader = new ScratchLoader(cmdArg);
         //assertEquals(loader.get_file_input_dir(), cmd_arg);
     }
     /**
