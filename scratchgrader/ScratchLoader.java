@@ -1,4 +1,4 @@
-package ScratchGrader;
+package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 /**
