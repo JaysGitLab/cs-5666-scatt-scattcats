@@ -3,6 +3,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.File;
+import java.io.FilenameFilter;
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
@@ -38,16 +39,24 @@ public class ScratchLoader
         //Path[] sb2FilePaths = getFilePathsSB2(this.inputFileDirectory);
     }
     /**
-     * getNumberOfFiles -Returns the number of files in the specified directory,
+     * getNumberSB2Files -Returns the number of files in the specified directory,
      *  does not recurse. 
      * @param verifiedInputFileDirectory -The file path to the input 
      *  directory that has already been validated for existance.
      * @return numFiles -The number of files in the specified directory.
+     * @source stackoverflow.com/questions/2102952/
+     *  listing-files-in-a-directory-matching-a-pattern-in-java
      */
-    public int getNumberOfFiles(Path verifiedInputFileDirectory) 
+    public int getNumberSB2Files(Path verifiedInputFileDirectory) 
     {
-        File tempFileObj = new File(verifiedInputFileDirectory.toString());
-        return tempFileObj.listFiles().length;
+        File currentDirectory = new File(".");
+        File[] sp2Files = currentDirectory.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File currentDirectory, String name) {
+                return name.endsWith(".sb2");
+            }
+        });
+        return sp2Files.length;
     }
     /**
      * getFilePathsSB2 -Returns an array of file paths pointing to the .sb2 
@@ -59,7 +68,7 @@ public class ScratchLoader
      */
     public Path[] getFilePathsSB2(Path verifiedInputFileDirectory) 
     {
-        int numberOfFiles = getNumberOfFiles(verifiedInputFileDirectory);
+        int numberOfFiles = getNumberSB2Files(verifiedInputFileDirectory);
         Path[] sb2FilePaths = new Path[numberOfFiles];
         //TODO: Iterate through every file in the verfied input 
         //  directory and detect sb2 files:
