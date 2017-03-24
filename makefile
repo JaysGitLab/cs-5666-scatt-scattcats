@@ -28,7 +28,7 @@ CC = javac $(CLASSPATH) -Xlint:deprecation
 
 default:
 	@echo "usage: make target"
-	@echo "available targets: compile, style, clean, test, jars"
+	@echo "available targets: compile, test, clean"
 
 compile: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class
 	@echo "compiled"
@@ -54,4 +54,3 @@ $(JUNIT_LOCAL): jars
 	curl $(JUNIT_URI) -o $(JUNIT_LOCAL) --silent --location
 $(HAMCREST_LOCAL): jars
 	curl $(HAMCREST_URI) -o $(HAMCREST_LOCAL) --silent --location
-
