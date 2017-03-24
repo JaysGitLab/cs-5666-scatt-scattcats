@@ -1,6 +1,9 @@
 package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
@@ -11,7 +14,7 @@ import java.nio.file.Paths;
 public class ScratchLoader 
 {
     private static Path inputFileDirectory;
-    
+
     /**
      * ScratchLoader -Constructor for objects of type ScratchLoader.
      * @param inputFileDirPath -The file path to the input directory 
@@ -19,16 +22,35 @@ public class ScratchLoader
      */
     public ScratchLoader(String inputFileDirPath) 
     {
-        try 
-        {
-            this.inputFileDirectory = Paths.get(inputFileDirPath);
-        } 
-        catch (Exception e) 
-        { 
-            e.printStackTrace(System.err);
+        // Ensure input file directory exists:
+        if (Files.exists(Paths.get(inputFileDirPath))) {
+           this.inputFileDirectory = Paths.get(inputFileDirPath);
+        } else {
+           //System.out.printf("ERROR: Can't find file path <%s> on machine.", inputFileDirPath);
+           this.inputFileDirectory = null;
         }
+        // Read all files in input directory:
+        //Path[] sb2FilePaths = getFilePathsSB2(this.inputFileDirectory);
     }
-    
+    /**
+     * getNumberOfFiles -Returns the number of files in the specified directory, does not recurse. 
+     * @param verifiedInputFileDirectory -The file path to the input directory that has already been validated for existance.
+     * @return numFiles -The number of files in the specified directory.
+     */
+    public int getNumberOfFiles(Path verifiedInputFileDirectory) {
+        File tempFileObj = new File(verifiedInputFileDirectory.toString());
+        return tempFileObj.listFiles().length;
+    }
+    /**
+     * getFilePathsSB2 -Returns an array of file paths pointing to the .sb2 files in the provided input file directory.
+     * @param verifiedInputFileDirectory -The file path to the input directory that has already been validated for existance.
+     * @return sb2FilePaths -An array of file paths pointing to the .sb2 files in the provided existing directory.
+     */
+    public Path[] getFilePathsSB2(Path verifiedInputFileDirectory) {
+       Path[] sb2FilePaths = new Path[getNumberOfFiles(verifiedInputFileDirectory)];
+       //TODO: Iterate through every file in the verfied input directory and detect sb2 files:
+       return null;
+    }
     /**
      * getFileInputDir -Returns the directory where the scratch 
      *  files to be processed are housed. 
