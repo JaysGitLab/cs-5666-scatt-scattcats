@@ -30,20 +30,20 @@ default:
 	@echo "usage: make target"
 	@echo "available targets: compile, style, clean, test, jars"
 
-compile: scratchGrader/ScratchGrader.class junit/ScratchGraderTest.class
+compile: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class
 	@echo "compiled"
 
-junit/ScratchGraderTest.class: $(JUNIT_LOCAL)
+junit/ScratchLoaderTest.class: $(JUNIT_LOCAL)
 
 style:
-	checkstyle -c $(STYLE_XML) junit/ScratchGraderTest.java scratchGrader/ScratchGrader.java
+	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java
 
 clean:
-	rm -f scratchGrader/ScratchGrader.class
-	rm -f junit/ScratchGraderTest.class
+	rm -f scratchgrader/ScratchLoader.class
+	rm -f junit/ScratchLoaderTest.class
 
-test:  scratchGrader/ScratchGrader.class junit/ScratchGraderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
-	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.ScratchGraderTest
+test: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
+	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest
 
 jars:
 	mkdir jars
