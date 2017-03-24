@@ -1,7 +1,5 @@
 package junit;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.nio.file.FileSystems;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -17,27 +15,30 @@ import scratchgrader.ScratchLoader;
 public class ScratchLoaderTest 
 {
     /**
-    * testScratchLoaderConstructorSucess -Tests the initialization of the ScratchLoader program.
+    * testScratchLoaderConstructorSucess -Tests the initialization of 
+    *  the ScratchLoader program.
     */
     @Test
     public void testScratchLoaderConstructorSuccess()
     {
         //get current working directory path:
-        Path inputFilePath = FileSystems.getDefault().getPath("scratchFiles", "Animate the Crab.sb2");
+        Path inputFilePath = FileSystems.getDefault().getPath(
+            "scratchFiles", "Animate the Crab.sb2");
         //System.out.println(new File(".").getCanonicalPath()); 
         //String inputDir = "../scratchFiles/Animate the Crab.sb2";
         ScratchLoader loader = new ScratchLoader(inputFilePath.toString());
         assertEquals(loader.getFileInputDir(), inputFilePath);
     }
     /**
-     * testScratchLoaderConstructorFailure -Tests the initialization of the ScratchLoader program
-     *  with a non-existant input directory.
+     * testScratchLoaderConstructorFailure -Tests the initialization of 
+     *  the ScratchLoader program with a non-existant input directory.
      */
     @Test
     public void testScratchLoaderConstructorFailure()
     {
         //get current working directory path:
-        Path inputFilePath = FileSystems.getDefault().getPath("scratchFiles", "no-file.sb2");
+        Path inputFilePath = FileSystems.getDefault().getPath(
+            "scratchFiles", "no-file.sb2");
         ScratchLoader loader = new ScratchLoader(inputFilePath.toString());
         assertEquals(loader.getFileInputDir(), null);
     }
