@@ -1,8 +1,6 @@
 package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.json.JSONObject;
-import org.json.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import io.restassured.path.json.JsonPath;
