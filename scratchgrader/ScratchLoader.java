@@ -96,7 +96,7 @@ public class ScratchLoader
     *@return boolean - True if all the refences
     * are good.
     */
-    /** 
+    
     public static boolean checkMediaReferences() throws FileNotFoundException, IOException, ParseException
     {
         Boolean yes = true;
@@ -223,7 +223,6 @@ public class ScratchLoader
             }
         }        
         return yes;  
-    }
-    */
+    }   
 
 }

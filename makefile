@@ -28,7 +28,7 @@ JSONGROOVY_LOCAL =jars/$(JSON_GROOVY)
 GROOVY_LOCAL = jars/$(GROOVY)
 PATH_LOCAL = jars/$(JSON_PATH)
 SIMPLE_LOCAL = jars/$(JSON_SIMPLE)
-CLASSPATH = -cp .:$(JUNIT_LOCAL)
+CLASSPATH = -cp .:$(JUNIT_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL)
 CC = javac $(CLASSPATH) -Xlint:deprecation
 
 # Teach make how to use javac to convert between .java and .class
