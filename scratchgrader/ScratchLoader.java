@@ -1,9 +1,11 @@
 package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+/** 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import io.restassured.path.json.JsonPath;
+*/
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -94,6 +96,7 @@ public class ScratchLoader
     *@return boolean - True if all the refences
     * are good.
     */
+    /** 
     public static boolean checkMediaReferences() throws FileNotFoundException, IOException, ParseException
     {
         Boolean yes = true;
@@ -221,5 +224,6 @@ public class ScratchLoader
         }        
         return yes;  
     }
+    */
 
 }
