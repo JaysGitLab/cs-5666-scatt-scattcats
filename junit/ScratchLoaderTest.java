@@ -1,6 +1,7 @@
 package junit;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
@@ -53,13 +54,15 @@ public class ScratchLoaderTest
     @Test
     public void testMediaCheck()
     {
-	try{
+	try 
+    {
 	    String cmdArg = "scratchFiles/Paint with Gobo";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
+        ScratchLoader loader = new ScratchLoader(cmdArg);
 	    assertTrue(loader.checkMediaReferences());
 	}
-	catch(Exception e)
+	catch (Exception e)
 	{
+        System.out.println("File not there");
 	}
     }
 
@@ -70,13 +73,15 @@ public class ScratchLoaderTest
     @Test
     public void testMediaCheckFail()
     {
-	try{
+	try
+    {
 	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
+        ScratchLoader loader = new ScratchLoader(cmdArg);
 	    assertFalse(loader.checkMediaReferences());
 	}
-	catch(Exception e)
+	catch (Exception e)
 	{
+         System.out.println("File not there");
 	}
     }
 }

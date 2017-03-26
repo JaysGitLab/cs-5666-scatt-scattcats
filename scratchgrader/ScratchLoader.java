@@ -1,12 +1,8 @@
 package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import io.restassured.path.json.JsonPath;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -98,128 +94,155 @@ public class ScratchLoader
     public static boolean checkMediaReferences()
     {
         Boolean yes = true;
-        try{
-	String path = inputFileDirectory.toString();
-	File file = new File(path + "\\project.json");       
-        List<String> children = JsonPath.from(file).get("children.costumes.baseLayerID");
-        List<String> childrentype = JsonPath.from(file).get("children.costumes.baseLayerMD5");
-        List  child = Arrays.asList(children.toArray());
-        List  childType = Arrays.asList(childrentype.toArray());       
-        List<String> sound = JsonPath.from(file).get("sounds.soundID");
-        List<String> soundtype = JsonPath.from(file).get("sounds.md5");
-        List<String> costume = JsonPath.from(file).get("costumes.baseLayerID");
-        List<String> costumetype = JsonPath.from(file).get("costumes.baseLayerMD5");       
-        String penlayer = JsonPath.from(file).get("penLayerID").toString();
-        String penlyertype = JsonPath.from(file).get("penLayerMD5");
-        
-        if(sound != null && yes == true)
+        try
         {
-            for (int i = 0; i < sound.size(); i++)
+            String path = inputFileDirectory.toString();
+            File file = new File(path + "\\project.json");       
+            List<String> children = JsonPath.from(file).
+            get("children.costumes.baseLayerID");
+            List<String> childrentype = JsonPath.from(file).
+            get("children.costumes.baseLayerMD5");
+            List  child = Arrays.asList(children.toArray());
+            List  childType = Arrays.
+            asList(childrentype.toArray());       
+            List<String> sound = JsonPath.from(file).
+            get("sounds.soundID");
+            List<String> soundtype = JsonPath.from(file).
+            get("sounds.md5");
+            List<String> costume = JsonPath.from(file).
+            get("costumes.baseLayerID");
+            List<String> costumetype = JsonPath.from(file).
+            get("costumes.baseLayerMD5");       
+            String penlayer = JsonPath.from(file).
+            get("penLayerID").toString();
+            String penlyertype = JsonPath.from(file).
+            get("penLayerMD5");
+            
+            if (sound != null && yes == true)
             {
-                String string = soundtype.get(i);
-                String[] parts = string.split("\\.");
-                String aux = parts[0]; // 004
-                String type = parts[1]; // 034556
-                File f = new File(path + "\\" + String.valueOf(sound.get(i)) + "." + type);
-                if(!f.exists() && !f.isDirectory()) 
-                { 
-                    yes = false;
-                    break;
-                }           
-            }
-        }   
-        if(child != null && yes == true)
-        {
-            for (int i = 0; i < child.size(); i++)
-            {
-                List  childOfChildren =  Arrays.asList(child.get(i));
-                String array = childOfChildren.get(0).toString();
-                String[] numbers = array.split(",");             
-               int [] numbersArray = new int[numbers.length];
-               if(numbers.length > 1)
-               {
-                    String[] first = numbers[0].split(Pattern.quote("["));
-                    String[] last = numbers[numbers.length-1].split(Pattern.quote("]"));
-                    numbersArray[0] = Integer.parseInt(first[1].trim());
-                    numbersArray[numbers.length-1] = Integer.parseInt(last[0].trim());
-               }
-               else
-               {
-                    String[] first = numbers[0].split(Pattern.quote("["));
-                    String[] last = first[1].split(Pattern.quote("]"));
-                    numbersArray[0] = Integer.parseInt(last[0].trim()); 
-               }
-               for (int k = 1; k < numbers.length-1; k++ )
-               {             
-                   numbersArray[k] = Integer.parseInt(numbers[k].trim());                   
-               }            
-               List  childOfChildrenType =  Arrays.asList(childType.get(i));
-               String arrayType = childOfChildrenType.get(0).toString();
-               String[] types = arrayType.split(",");               
-               String [] typeArray = new String[types.length];
-               if(types.length > 1)
-               {
-                    String[] firstType = types[0].split(Pattern.quote("["));
-                    String[] lastType = types[types.length-1].split(Pattern.quote("]"));
-                    typeArray[0] = firstType[1].trim();
-                    typeArray[numbers.length-1] = lastType[0].trim();
-               }
-               else
-               {
-                    String[] firstType = types[0].split(Pattern.quote("["));
-                    String[] lastType = firstType[1].split(Pattern.quote("]"));
-                    typeArray[0] = lastType[0].trim();
-               }
-               for (int k = 1; k < typeArray.length-1; k++ )
-               {
-                 
-                   typeArray[k] = types[k].trim();
-                   
-               }
-               
-                for(int j = 0; j < numbersArray.length ; j++  )
-                {    
-                    String string = typeArray[j];
+                for (int i = 0; i < sound.size(); i++)
+                {
+                    String string = soundtype.get(i);
                     String[] parts = string.split("\\.");
                     String aux = parts[0]; // 004
                     String type = parts[1]; // 034556
-                    File f = new File(path + "\\" + String.valueOf(numbersArray[j]) + "." + type);
-                    if(!f.exists() && !f.isDirectory()) 
+                    File f = new File(path + "\\" + String.
+                    valueOf(sound.get(i)) + "." + type);
+                    if (!f.exists() && !f.isDirectory()) 
+                    { 
+                        yes = false;
+                        break;
+                    }           
+                }
+            }   
+            if (child != null && yes == true)
+            {
+                for (int i = 0; i < child.size(); i++)
+                {
+                    List  childOfChildren =  Arrays.asList(child.get(i));
+                    String array = childOfChildren.get(0).toString();
+                    String[] numbers = array.split(",");             
+                int [] numbersArray = new int[numbers.length];
+                if (numbers.length > 1)
+                {
+                        String[] first = numbers[0].
+                        split(Pattern.quote("["));
+                        String[] last = numbers[numbers.length-1].
+                        split(Pattern.quote("]"));
+                        numbersArray[0] = Integer.parseInt(first[1].trim());
+                        numbersArray[numbers.length-1] = Integer.
+                        parseInt(last[0].trim());
+                }
+                else
+                {
+                        String[] first = numbers[0].
+                        split(Pattern.quote("["));
+                        String[] last = first[1].
+                        split(Pattern.quote("]"));
+                        numbersArray[0] = Integer.
+                        parseInt(last[0].trim()); 
+                }
+                for (int k = 1; k < numbers.length-1; k++)
+                {             
+                    numbersArray[k] = Integer.
+                    parseInt(numbers[k].trim());                   
+                }            
+                List  childOfChildrenType =  Arrays.
+                asList(childType.get(i));
+                String arrayType = childOfChildrenType.
+                get(0).toString();
+                String[] types = arrayType.split(",");               
+                String [] typeArray = new String[types.length];
+                if (types.length > 1)
+                {
+                        String[] firstType = types[0].
+                        split(Pattern.quote("["));
+                        String[] lastType = types[types.
+                        length-1].split(Pattern.quote("]"));
+                        typeArray[0] = firstType[1].trim();
+                        typeArray[numbers.length-1] = lastType[0].
+                        trim();
+                }
+                else
+                {
+                        String[] firstType = types[0].
+                        split(Pattern.quote("["));
+                        String[] lastType = firstType[1].
+                        split(Pattern.quote("]"));
+                        typeArray[0] = lastType[0].trim();
+                }
+                for (int k = 1; k < typeArray.length-1; k++)
+                {
+                    
+                    typeArray[k] = types[k].trim();
+                    
+                }
+                
+                    for (int j = 0; j < numbersArray.length ; j++)
+                    {    
+                        String string = typeArray[j];
+                        String[] parts = string.split("\\.");
+                        String aux = parts[0]; // 004
+                        String type = parts[1]; // 034556
+                        File f = new File(path + "\\" + String.
+                        valueOf(numbersArray[j]) + "." + type);
+                        if (!f.exists() && !f.isDirectory()) 
+                        { 
+                            yes = false;
+                            break;
+                        }
+                    }    
+                }
+            }
+            if (sound != null && yes == true)
+            {
+                for (int i = 0; i < costume.size(); i++)
+                {
+                    String string = costumetype.get(i);
+                    String[] parts = string.split("\\.");
+                    String aux = parts[0]; // 004
+                    String type = parts[1]; // 034556
+                    File f = new File(path + "\\" + String.
+                    valueOf(costume.get(i)) + "." + type);
+                    if (!f.exists() && !f.isDirectory()) 
                     { 
                         yes = false;
                         break;
                     }
-                }    
+                }           
             }
-        }
-        if(sound != null && yes == true)
-        {
-            for (int i = 0; i < costume.size(); i++)
+            if (sound != null && yes == true)
             {
-                String string = costumetype.get(i);
+                String string = penlyertype;
                 String[] parts = string.split("\\.");
                 String aux = parts[0]; // 004
                 String type = parts[1]; // 034556
-                File f = new File(path + "\\" + String.valueOf(costume.get(i)) + "." + type);
+                File f = new File(path + "\\" + penlayer + "." + type);
                 if(!f.exists() && !f.isDirectory()) 
                 { 
-                    yes = false;
-                    break;
+                    yes = false;                
                 }
-            }           
-        }
-        if(sound != null && yes == true)
-        {
-            String string = penlyertype;
-            String[] parts = string.split("\\.");
-            String aux = parts[0]; // 004
-            String type = parts[1]; // 034556
-            File f = new File(path + "\\" + penlayer + "." + type);
-            if(!f.exists() && !f.isDirectory()) 
-            { 
-                yes = false;                
             }
-        }
 	}
 	catch(Exception e)
 	{
