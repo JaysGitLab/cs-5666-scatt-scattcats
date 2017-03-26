@@ -91,7 +91,8 @@ public class ScratchLoader
     * are good.
     */
     
-    public static boolean checkMediaReferences()
+    public static boolean 
+        checkMediaReferences()
     {
         Boolean yes = true;
         try
@@ -124,8 +125,8 @@ public class ScratchLoader
                 {
                     String string = soundtype.get(i);
                     String[] parts = string.split("\\.");
-                    String aux = parts[0]; // 004
-                    String type = parts[1]; // 034556
+                    String aux = parts[0]; 
+                    String type = parts[1]; 
                     File f = new File(path + "\\" + String.
                         valueOf(sound.get(i)) + "." + type);
                     if (!f.exists() && !f.isDirectory()) 
@@ -143,60 +144,60 @@ public class ScratchLoader
                     String array = childOfChildren.get(0).toString();
                     String[] numbers = array.split(",");             
                     int [] numbersArray = new int[numbers.length];
-                if (numbers.length > 1)
-                {
-                    String[] first = numbers[0].
-                        split(Pattern.quote("["));
-                    String[] last = numbers[numbers.length - 1].
-                        split(Pattern.quote("]"));
-                    numbersArray[0] = Integer.parseInt(first[1].trim());
-                    numbersArray[numbers.length - 1] = Integer.
-                        parseInt(last[0].trim());
-                }
-                else
-                {
-                    String[] first = numbers[0].
-                        split(Pattern.quote("["));
-                    String[] last = first[1].
-                        split(Pattern.quote("]"));
-                    numbersArray[0] = Integer.
-                        parseInt(last[0].trim()); 
-                }
-                for (int k = 1; k < numbers.length - 1; k++)
-                {             
-                    numbersArray[k] = Integer.
-                        parseInt(numbers[k].trim());                   
-                }            
-                List  childOfChildrenType =  Arrays.
-                    asList(childType.get(i));
-                String arrayType = childOfChildrenType.
-                    get(0).toString();
-                String[] types = arrayType.split(",");               
-                String [] typeArray = new String[types.length];
-                if (types.length > 1)
-                {
-                        String[] firstType = types[0].
+                    if (numbers.length > 1)
+                    {
+                        String[] first = numbers[0].
                             split(Pattern.quote("["));
-                        String[] lastType = types[types.
-                            length - 1].split(Pattern.quote("]"));
-                        typeArray[0] = firstType[1].trim();
-                        typeArray[numbers.length - 1] = lastType[0].
-                            trim();
-                }
-                else
-                {
-                        String[] firstType = types[0].
-                            split(Pattern.quote("["));
-                        String[] lastType = firstType[1].
+                        String[] last = numbers[numbers.length - 1].
                             split(Pattern.quote("]"));
-                        typeArray[0] = lastType[0].trim();
-                }
-                for (int k = 1; k < typeArray.length - 1; k++)
-                {
-                    
-                    typeArray[k] = types[k].trim();
-                    
-                }
+                        numbersArray[0] = Integer.parseInt(first[1].trim());
+                        numbersArray[numbers.length - 1] = Integer.
+                            parseInt(last[0].trim());
+                    }
+                    else
+                    {
+                        String[] first = numbers[0].
+                            split(Pattern.quote("["));
+                        String[] last = first[1].
+                            split(Pattern.quote("]"));
+                        numbersArray[0] = Integer.
+                            parseInt(last[0].trim()); 
+                    }
+                    for (int k = 1; k < numbers.length - 1; k++)
+                    {             
+                        numbersArray[k] = Integer.
+                            parseInt(numbers[k].trim());                   
+                    }            
+                    List  childOfChildrenType =  Arrays.
+                        asList(childType.get(i));
+                    String arrayType = childOfChildrenType.
+                        get(0).toString();
+                    String[] types = arrayType.split(",");               
+                    String [] typeArray = new String[types.length];
+                    if (types.length > 1)
+                    {
+                            String[] firstType = types[0].
+                                split(Pattern.quote("["));
+                            String[] lastType = types[types.
+                                length - 1].split(Pattern.quote("]"));
+                            typeArray[0] = firstType[1].trim();
+                            typeArray[numbers.length - 1] = lastType[0].
+                                trim();
+                    }
+                    else
+                    {
+                            String[] firstType = types[0].
+                                split(Pattern.quote("["));
+                            String[] lastType = firstType[1].
+                                split(Pattern.quote("]"));
+                            typeArray[0] = lastType[0].trim();
+                    }
+                    for (int k = 1; k < typeArray.length - 1; k++)
+                    {
+                        
+                        typeArray[k] = types[k].trim();
+                        
+                    }
                 
                     for (int j = 0; j < numbersArray.length; j++)
                     {    
