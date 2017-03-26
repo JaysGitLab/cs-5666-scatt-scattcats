@@ -45,4 +45,21 @@ public class ScratchLoaderTest
         ScratchLoader loader = new ScratchLoader(cmdArg);
         assertTrue(loader.checkSB2Extension());
     }
+    
+    /**
+    *Test to check is media files are there.
+    *
+    */	
+    @Test
+    public void testMediaCheck()
+    {
+	try{
+	    String cmdArg = "scratchFiles/Paint with Gobo";
+            ScratchLoader loader = new ScratchLoader(cmdArg);
+	    assertTrue(loader.checkMediaReferences());
+	}
+	catch(Exception e)
+	{
+	}
+    }
 }

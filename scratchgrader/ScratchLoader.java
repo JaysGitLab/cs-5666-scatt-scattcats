@@ -1,11 +1,9 @@
 package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-/** 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import io.restassured.path.json.JsonPath;
-*/
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -101,8 +99,7 @@ public class ScratchLoader
     {
         Boolean yes = true;
         String path = inputFileDirectory.toString();
-        File file = new File(path + "\\project.json");
-        JSONParser parser = new JSONParser();       
+	File file = new File(path + "\\project.json");       
         List<String> children = JsonPath.from(file).get("children.costumes.baseLayerID");
         List<String> childrentype = JsonPath.from(file).get("children.costumes.baseLayerMD5");
         List  child = Arrays.asList(children.toArray());
