@@ -95,10 +95,11 @@ public class ScratchLoader
     * are good.
     */
     
-    public static boolean checkMediaReferences() throws FileNotFoundException, IOException, ParseException
+    public static boolean checkMediaReferences()
     {
         Boolean yes = true;
-        String path = inputFileDirectory.toString();
+        try{
+	String path = inputFileDirectory.toString();
 	File file = new File(path + "\\project.json");       
         List<String> children = JsonPath.from(file).get("children.costumes.baseLayerID");
         List<String> childrentype = JsonPath.from(file).get("children.costumes.baseLayerMD5");
@@ -218,7 +219,11 @@ public class ScratchLoader
             { 
                 yes = false;                
             }
-        }        
+        }
+	}
+	catch(Exception e)
+	{
+	}        
         return yes;  
     }   
 
