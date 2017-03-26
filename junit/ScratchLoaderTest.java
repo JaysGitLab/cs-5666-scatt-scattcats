@@ -54,16 +54,16 @@ public class ScratchLoaderTest
     @Test
     public void testMediaCheck()
     {
-	    try 
-        {
-	        String cmdArg = "scratchFiles/Paint with Gobo";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
-	        assertTrue(loader.checkMediaReferences());
-	    }
-	    catch (Exception e)
-	    {
-            //System.out.println("File not there");
-	    }
+	try 
+    {
+	    String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchLoader loader = new ScratchLoader(cmdArg);
+	    assertTrue(loader.checkMediaReferences());
+	}
+	catch (Exception e)
+	{
+        System.out.println("File not there");
+	}
     }
 
     /**
@@ -73,15 +73,15 @@ public class ScratchLoaderTest
     @Test
     public void testMediaCheckFail()
     {
-	    try
-        {
-	        String cmdArg = "scratchFiles/Paint with Gobo Fail";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
-	        assertFalse(loader.checkMediaReferences());
-	    }
-	    catch (Exception e)
-	    {
-            //System.out.println("File not there");
-	    }
+	try
+    {
+	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
+        ScratchLoader loader = new ScratchLoader(cmdArg);
+	    assertFalse(loader.checkMediaReferences());
+	}
+	catch (Exception e)
+	{
+        System.out.println("File not there");
+	}
     }
 }
