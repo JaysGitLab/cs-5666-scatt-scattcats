@@ -92,7 +92,7 @@ public class ScratchLoader
     */
     
     public static boolean 
-        checkMediaReferences()
+    checkMediaReferences()
     {
         Boolean yes = true;
         try
@@ -176,21 +176,21 @@ public class ScratchLoader
                     String [] typeArray = new String[types.length];
                     if (types.length > 1)
                     {
-                            String[] firstType = types[0].
-                                split(Pattern.quote("["));
-                            String[] lastType = types[types.
-                                length - 1].split(Pattern.quote("]"));
-                            typeArray[0] = firstType[1].trim();
-                            typeArray[numbers.length - 1] = lastType[0].
-                                trim();
+                        String[] firstType = types[0].
+                            split(Pattern.quote("["));
+                        String[] lastType = types[types.
+                            length - 1].split(Pattern.quote("]"));
+                        typeArray[0] = firstType[1].trim();
+                        typeArray[numbers.length - 1] = lastType[0].
+                            trim();
                     }
                     else
                     {
-                            String[] firstType = types[0].
-                                split(Pattern.quote("["));
-                            String[] lastType = firstType[1].
-                                split(Pattern.quote("]"));
-                            typeArray[0] = lastType[0].trim();
+                        String[] firstType = types[0].
+                            split(Pattern.quote("["));
+                        String[] lastType = firstType[1].
+                            split(Pattern.quote("]"));
+                        typeArray[0] = lastType[0].trim();
                     }
                     for (int k = 1; k < typeArray.length - 1; k++)
                     {
@@ -239,7 +239,7 @@ public class ScratchLoader
                 String aux = parts[0]; 
                 String type = parts[1]; 
                 File f = new File(path + "\\" + penlayer + "." + type);
-                if(!f.exists() && !f.isDirectory()) 
+                if (!f.exists() && !f.isDirectory()) 
                 { 
                     yes = false;                
                 }
@@ -247,7 +247,7 @@ public class ScratchLoader
 	}
 	catch (Exception e)
 	{
-        System.out.println("File not there");
+            System.out.println("File not there");
 	}        
         return yes;  
     }   
