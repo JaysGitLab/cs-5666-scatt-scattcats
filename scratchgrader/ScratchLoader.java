@@ -91,14 +91,16 @@ public class ScratchLoader
     * are good.
     */
     
-    public static boolean 
+    public 
+    static 
+    boolean 
     checkMediaReferences()
     {
         Boolean yes = true;
         try
         {
             String path = inputFileDirectory.toString();
-            File file = new File(path + "\\project.json");       
+            File file = new File(path + "/project.json");       
             List<String> children = JsonPath.from(file).
                 get("children.costumes.baseLayerID");
             List<String> childrentype = JsonPath.from(file).
@@ -127,9 +129,9 @@ public class ScratchLoader
                     String[] parts = string.split("\\.");
                     String aux = parts[0]; 
                     String type = parts[1]; 
-                    File f = new File(path + "\\" + String.
+                    File f = new File(path + "/" + String.
                         valueOf(sound.get(i)) + "." + type);
-                    if (!f.exists() && !f.isDirectory()) 
+		    if (!f.exists() && !f.isDirectory()) 
                     { 
                         yes = false;
                         break;
@@ -205,7 +207,7 @@ public class ScratchLoader
                         String[] parts = string.split("\\.");
                         String aux = parts[0]; 
                         String type = parts[1]; 
-                        File f = new File(path + "\\" + String.
+                        File f = new File(path + "/" + String.
                             valueOf(numbersArray[j]) + "." + type);
                         if (!f.exists() && !f.isDirectory()) 
                         { 
@@ -223,7 +225,7 @@ public class ScratchLoader
                     String[] parts = string.split("\\.");
                     String aux = parts[0]; 
                     String type = parts[1]; 
-                    File f = new File(path + "\\" + String.
+                    File f = new File(path + "/" + String.
                         valueOf(costume.get(i)) + "." + type);
                     if (!f.exists() && !f.isDirectory()) 
                     { 
@@ -238,7 +240,7 @@ public class ScratchLoader
                 String[] parts = string.split("\\.");
                 String aux = parts[0]; 
                 String type = parts[1]; 
-                File f = new File(path + "\\" + penlayer + "." + type);
+                File f = new File(path + "/" + penlayer + "." + type);
                 if (!f.exists() && !f.isDirectory()) 
                 { 
                     yes = false;                
@@ -247,7 +249,7 @@ public class ScratchLoader
 	}
 	catch (Exception e)
 	{
-            System.out.println("File not there");
+            System.out.println(e);
 	}        
         return yes;  
     }   

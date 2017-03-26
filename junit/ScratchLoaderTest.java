@@ -62,7 +62,7 @@ public class ScratchLoaderTest
 	}
 	catch (Exception e)
 	{
-            System.out.println("File not there");
+            System.out.println(e);
 	}
     }
 
@@ -81,7 +81,7 @@ public class ScratchLoaderTest
 	}
 	catch (Exception e)
 	{
-            System.out.println("File not there");
+            System.out.println(e);
 	}
     }
 }
