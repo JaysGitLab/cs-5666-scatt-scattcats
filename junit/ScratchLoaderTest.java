@@ -62,4 +62,21 @@ public class ScratchLoaderTest
 	{
 	}
     }
+
+    /**
+    * Fail test to check is media files are there.
+    *
+    */	
+    @Test
+    public void testMediaCheckFail()
+    {
+	try{
+	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
+            ScratchLoader loader = new ScratchLoader(cmdArg);
+	    assertFalse(loader.checkMediaReferences());
+	}
+	catch(Exception e)
+	{
+	}
+    }
 }
