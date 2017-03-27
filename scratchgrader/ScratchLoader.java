@@ -2,8 +2,6 @@ package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.nio.file.NoSuchFileException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -44,33 +42,50 @@ public class ScratchLoader
         //Path[] sb2FilePaths = getFilePathsSB2(this.inputFileDirectory);
     }
     /**
-     * getDirectoryContents -Returns the contents of the specified directory as a list of Path objects.
-     * @param iputFileDir -The Path object representing the input directory.
-     * @return fileNames -The list of files in the specified directory as Path objects. 
+     * getDirectoryContents -Returns the contents of the specified directory 
+     *  as a list of Path objects.
+     * @param inputFileDir -The input directory to list contents of.
+     * @return fileNames -The list of files in the specified 
+     *  directory as Path objects. 
      */
-    public static List<Path> getDirectoryContents(Path inputFileDir) {
+    public static List<Path> getDirectoryContents(Path inputFileDir)
+    {
         //Create container for path objects:
         List<Path> fileNames = new ArrayList();
         //Verify path existance:
         Path cwd;
-        try {
+        try 
+        {
             cwd = inputFileDir.toRealPath();
             // Check to see if absolute path is readable:
-            if (Files.isReadable(cwd)) {
-                // Iterate through every file in directory and record path objects:
-                try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(cwd.toString()))) {
-                    for (Path path : dirStream) {
+            if (Files.isReadable(cwd)) 
+            {
+                // Iterate every file in dir and record path objects:
+                try (DirectoryStream<Path> dirStream = 
+                        Files.newDirectoryStream(
+                            Paths.get(cwd.toString()))) 
+                {
+                    for (Path path : dirStream) 
+                    {
                         fileNames.add(path);
                     }
-                } catch (IOException ioe) {
+                } 
+                catch (IOException ioe) 
+                {
                     System.err.format("%s%n", ioe);
                 }
-            } else {
+            } 
+            else 
+            {
                 System.err.format("Unreadable Path %s", cwd);
             }
-        } catch (NoSuchFileException nsfe) {
+        } 
+        catch (NoSuchFileException nsfe) 
+        {
             System.err.format("%s: no such" + "file or directory%n", nsfe);
-        } catch (IOException ioe) {
+        } 
+        catch (IOException ioe) 
+        {
             System.err.format("%s%n", ioe);
         }
         return fileNames;
