@@ -86,10 +86,6 @@ public class ScratchLoader
      */
     public Path[] getFilePathsSB2(Path verifiedInputFileDirectory) 
     {
-        int numberOfFiles = getNumberSB2Files(verifiedInputFileDirectory);
-        Path[] sb2FilePaths = new Path[numberOfFiles];
-        //TODO: Iterate through every file in the verfied input 
-        //  directory and detect sb2 files:
         return null;
     }
     /**

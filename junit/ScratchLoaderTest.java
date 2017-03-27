@@ -51,16 +51,25 @@ public class ScratchLoaderTest
      */
     @Test
     public void testGetDirectoryContentsSuccess() {
-        System.out.printf("This test requires manual validation. Confirm output matches contents of taret directory.");
+        System.out.printf("\nThis test requires manual validation. Confirm output matches the contents of the directory shown below.\n");
         Path inputFileDir = Paths.get(System.getProperty("user.dir") + "/scratchFiles");
-        System.out.printf("\nTesting Path: %s\n", inputFileDir.toString());
+        //System.out.printf("\nTesting Path: %s\n", inputFileDir.toString());
         List<Path> contents = ScratchLoader.getDirectoryContents(inputFileDir); 
-        System.out.println("Printing Directory Contents:");
+        System.out.printf("\tPrinting Contents of Directory <%s>:\n", inputFileDir.toString());
         int itemCounter = 0;
         for (Path fp : contents) {
-            System.out.printf("Item: %d\tPath: %s\n", itemCounter, fp.toString());
+            System.out.printf("\t\tItem: %d\tPath: %s\n", itemCounter, fp.toString());
             itemCounter++;
         }
+        assertEquals(true, true);
+    }
+    /**
+     * testGetDirectoryContentsFailure -Tests the throwing of the appropriate exceptions in
+     *  the event a nonexistant directory is provided to getDirectoryContents.
+     */
+    @Test
+    public void testGetDirectoryContentsFailure() {
+        //TODO: method body.
         assertEquals(true, true);
     }
 }
