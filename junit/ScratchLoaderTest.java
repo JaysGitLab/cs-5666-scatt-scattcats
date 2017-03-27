@@ -63,18 +63,5 @@ public class ScratchLoaderTest
         }
         assertEquals(true, true);
     }
-    /**
-     * testGetNumberSB2Files -Tests the functionality of the getNumberSB2Files method.
-     */
-    @Test
-    public void testGetNumberSB2Files()
-    {
-        //initalization:
-        Path inputFilePath = FileSystems.getDefault().getPath(
-            "scratchFiles");
-        ScratchLoader loader = new ScratchLoader(inputFilePath.toString());
-        int numSP2Files = 1;
-        assertEquals(loader.getNumberSB2Files(inputFilePath), numSP2Files);
-    }
 }
 

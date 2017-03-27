@@ -77,46 +77,6 @@ public class ScratchLoader
     }
 
     /**
-     * getNumberSB2Files -Returns the number of files in the specified directory,
-     *  does not recurse. 
-     * @param verifiedInputFileDirectory -The file path to the input 
-     *  directory that has already been validated for existance.
-     * @return numFiles -The number of files in the specified directory.
-     * @source stackoverflow.com/questions/2102952/
-     *  listing-files-in-a-directory-matching-a-pattern-in-java
-     */
-    public int getNumberSB2Files(Path verifiedInputFileDirectory) 
-    {
-        //Path currentDirectory = Path(System.getProperty("user.dir"));
-        //Create a path pointing to the user directory where the compiler was executed:
-        Path currentDirectory = Paths.get(System.getProperty("user.dir"));
-        //Convert the relative path to an absolute one and ensure existance:
-        Path cwd;
-        try {
-            cwd = currentDirectory.toRealPath();
-            if (Files.isReadable(cwd)) {
-                getDirectoryContents(cwd);
-            }
-            System.out.printf("\nIs Readable Path: %s\n", Files.isReadable(cwd));
-            System.out.printf("\nIs Readable Path2: %s\n", Files.exists(cwd));
-        } catch (NoSuchFileException nsfe) {
-            System.err.format("%s: no such" + "file or directory%n", currentDirectory);
-        } catch (IOException ioe) {
-            System.err.format("%s%n", ioe);
-        }
-        System.out.printf("\nCurrent Directory: %s\n", currentDirectory);
-        //Check file accessability:
-        /*
-        File[] sp2Files = currentDirectory.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File currentDirectory, String name) {
-                return name.endsWith(".sb2");
-            }
-        });
-        */
-        return -1;
-    }
-    /**
      * getFilePathsSB2 -Returns an array of file paths pointing to the .sb2 
      *  files in the provided input file directory.
      * @param verifiedInputFileDirectory -The file path to the input 
@@ -141,17 +101,5 @@ public class ScratchLoader
     public Path getFileInputDir() 
     {
         return inputFileDirectory;    
-    }
-    /**
-     * identifySP2Locations -Returns the file paths 
-     *  associated with every .sp2 file in the 
-     *  specified input directory.
-     * @return sp2_paths -The list of file paths
-     *  where every .sp2 file can be found. 
-    **/
-    private Path[] identifySP2Locations()
-    {
-        //TODO: write method body. 
-        return null;
     }
 }
