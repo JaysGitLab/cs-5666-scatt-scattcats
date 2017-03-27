@@ -3,6 +3,7 @@ import java.nio.file.Path;
 import java.nio.file.FileSystems;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
 
@@ -42,6 +43,14 @@ public class ScratchLoaderTest
         ScratchLoader loader = new ScratchLoader(inputFilePath.toString());
         assertEquals(loader.getFileInputDir(), null);
     }
-
+    /**
+    * Test to determine whether a file has a .sb2 extension.
+    */
+    @Test
+    public void testSB2Extension()
+    {
+        String cmdArg = "scratchFiles/Animate the Crab.sb2";
+        ScratchLoader loader = new ScratchLoader(cmdArg);
+        assertTrue(loader.checkSB2Extension());
+    }
 }
-
