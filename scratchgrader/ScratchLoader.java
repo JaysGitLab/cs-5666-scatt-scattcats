@@ -252,6 +252,49 @@ public class ScratchLoader
             System.out.println(e);
 	}        
         return yes;  
+    }
+
+    /**
+    * unzipFile - This method unzip a file
+    * and creates the corresponding folder.
+    *
+    */
+
+    public static void unzipFile()
+    {
+        
+        List<Path> files = getDirectoryContents
+            (inputFileDirectory);       
+        for (int i = 0; i < files.size(); i++)
+        {
+            String fileName = files.get(i)
+                .getName(files.get(i).getNameCount()-1).toString();
+            String[] parts = fileName.split("\\.");
+            String folderName = parts[0]; 
+            String type;
+            if (parts.length > 1)
+                type = parts[1];
+            else
+                type = "";
+            if (type.compareTo("zip") == 0)
+            {
+                String source = fileup + "/" 
+                    + folderName + "." + type;
+                String destination = fileup 
+                    + "/" + folderName;
+                new File(destination).mkdir();
+                try 
+                {
+                    ZipFile zipFile = new 
+                        ZipFile(source);
+                    zipFile.extractAll(destination);
+                } 
+                catch (ZipException e) 
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }   
 
 }

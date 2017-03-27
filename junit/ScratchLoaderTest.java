@@ -84,4 +84,33 @@ public class ScratchLoaderTest
             System.out.println(e);
 	}
     }
+
+    /**
+    * Test to unzip a file.
+    *
+    */	
+    @Test
+    public void testMediaCheckFail()
+    {
+         String cmdArg = "scratchFiles/Animate the Crab";
+            ScratchLoader loader = new ScratchLoader(cmdArg);
+        File file = new File(inputFileDirector.toString());
+        if(file.exists())
+        {
+            List<Path> files = 
+                getDirectoryContents(inputFileDirector);
+            for (int i = 0; i < files.size(); i++)
+            {
+                File tempFile = new 
+                    File(files.get(i).toString());
+                tempFile.delete();
+            }
+            file.delete();
+        }
+        cmdArg = "scratchFiles";
+        loader = new ScratchLoader(cmdArg);
+        unzipFile();
+        File file = new File(inputFileDirector.toString() + "/" + "Animate the Crab");
+        assertTrue(file.exists());
+    }
 }

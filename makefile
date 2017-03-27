@@ -22,13 +22,15 @@ JSON_GROOVY = groovy-json-2.4.6.jar
 GROOVY = groovy-2.4.6.jar
 JSON_PATH = json-path-3.0.2.jar
 JSON_SIMPLE = json-simple-1.1.1.jar
+ZIP_JAR = zip4j_1.3.2.jar
 STYLE_XML = misc/appstate_style.xml
 COMMON_LOCAL = jars/$(JSON_COMMON)
 JSONGROOVY_LOCAL =jars/$(JSON_GROOVY)
 GROOVY_LOCAL = jars/$(GROOVY)
 PATH_LOCAL = jars/$(JSON_PATH)
 SIMPLE_LOCAL = jars/$(JSON_SIMPLE)
-CLASSPATH = -cp .:$(JUNIT_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL)
+ZIP_LOCAL = jars/$(ZIP_JAR)
+CLASSPATH = -cp .:$(JUNIT_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL)
 CC = javac $(CLASSPATH) -Xlint:deprecation
 
 # Teach make how to use javac to convert between .java and .class
@@ -43,7 +45,7 @@ default:
 compile: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
-junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL)
+junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL):$(ZIP_LOCAL)
 
 style:
 	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java
