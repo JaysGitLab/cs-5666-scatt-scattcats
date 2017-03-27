@@ -4,7 +4,6 @@ import java.nio.file.Paths;
 import java.nio.file.FileSystems;
 import org.junit.Test;
 import java.util.List;
-import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
@@ -46,29 +45,45 @@ public class ScratchLoaderTest
         assertEquals(loader.getFileInputDir(), null);
     }
     /**
-     * testGetDirectoryContentsSuccess -Tests the implemntation of getDirectoryContents;
-     *  which returns the contents of the specified directory. 
+     * testGetDirectoryContentsSuccess -Tests the implemntation of 
+     *  getDirectoryContents; which returns the contents 
+     *  of the specified directory. 
      */
     @Test
-    public void testGetDirectoryContentsSuccess() {
-        System.out.printf("\nThis test requires manual validation. Confirm output matches the contents of the directory shown below.\n");
-        Path inputFileDir = Paths.get(System.getProperty("user.dir") + "/scratchFiles");
+    public void testGetDirectoryContentsSuccess() 
+    {
+        System.out.printf(
+            "\nThis test requires manual validation. " 
+            + "Confirm output matches the contents of " 
+            + "the directory shown below.\n"
+        );
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/scratchFiles");
         //System.out.printf("\nTesting Path: %s\n", inputFileDir.toString());
         List<Path> contents = ScratchLoader.getDirectoryContents(inputFileDir); 
-        System.out.printf("\tPrinting Contents of Directory <%s>:\n", inputFileDir.toString());
+        System.out.printf(
+            "\tPrinting Contents of Directory <%s>:\n", 
+            inputFileDir.toString()
+        );
         int itemCounter = 0;
-        for (Path fp : contents) {
-            System.out.printf("\t\tItem: %d\tPath: %s\n", itemCounter, fp.toString());
+        for (Path fp : contents) 
+        {
+            System.out.printf(
+                "\t\tItem: %d\tPath: %s\n", 
+                itemCounter, fp.toString()
+            );
             itemCounter++;
         }
         assertEquals(true, true);
     }
     /**
-     * testGetDirectoryContentsFailure -Tests the throwing of the appropriate exceptions in
-     *  the event a nonexistant directory is provided to getDirectoryContents.
+     * testGetDirectoryContentsFailure -Tests the throwing of the 
+     *  appropriate exceptions in the event a nonexistant 
+     *  directory is provided to getDirectoryContents.
      */
     @Test
-    public void testGetDirectoryContentsFailure() {
+    public void testGetDirectoryContentsFailure() 
+    {
         //TODO: method body.
         assertEquals(true, true);
     }
