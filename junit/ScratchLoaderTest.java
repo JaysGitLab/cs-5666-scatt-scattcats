@@ -2,6 +2,14 @@ package junit;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
@@ -90,15 +98,15 @@ public class ScratchLoaderTest
     *
     */	
     @Test
-    public void testMediaCheckFail()
+    public void testUnzip()
     {
          String cmdArg = "scratchFiles/Animate the Crab";
             ScratchLoader loader = new ScratchLoader(cmdArg);
-        File file = new File(inputFileDirector.toString());
+        File file = new File(loader.toString());
         if(file.exists())
         {
-            List<Path> files = 
-                getDirectoryContents(inputFileDirector);
+            List<Path> files = loader.
+                getDirectoryContents(loader.getFileInputDir());
             for (int i = 0; i < files.size(); i++)
             {
                 File tempFile = new 
@@ -109,8 +117,8 @@ public class ScratchLoaderTest
         }
         cmdArg = "scratchFiles";
         loader = new ScratchLoader(cmdArg);
-        unzipFile();
-        File file = new File(inputFileDirector.toString() + "/" + "Animate the Crab");
-        assertTrue(file.exists());
+        loader.unzipFile();
+	file = new File("scratchFiles/Animate the Crab");
+	assertTrue(file.exists());
     }
 }

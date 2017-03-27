@@ -45,7 +45,7 @@ default:
 compile: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
-junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL):$(ZIP_LOCAL)
+junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
 
 style:
 	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java
@@ -55,7 +55,7 @@ clean:
 	rm -f junit/ScratchLoaderTest.class
 
 test: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
-	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest
+	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest
 
 jars:
 	mkdir jars

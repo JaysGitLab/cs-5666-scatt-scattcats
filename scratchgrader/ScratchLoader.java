@@ -6,6 +6,16 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import net.lingala.zip4j.exception.ZipException;
+import net.lingala.zip4j.core.ZipFile;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
@@ -273,20 +283,23 @@ public class ScratchLoader
             String folderName = parts[0]; 
             String type;
             if (parts.length > 1)
+	    {
                 type = parts[1];
-            else
-                type = "";
-            if (type.compareTo("zip") == 0)
+            }
+	    else
+	    {
+                type = " ";
+	    }
+            if (type.equals("zip"))
             {
-                String source = fileup + "/" 
-                    + folderName + "." + type;
-                String destination = fileup 
-                    + "/" + folderName;
+		String source = inputFileDirectory.toString() + "/" + folderName + "." + type;
+                String destination = inputFileDirectory.toString() + "/" + folderName;
                 new File(destination).mkdir();
                 try 
                 {
                     ZipFile zipFile = new 
                         ZipFile(source);
+		    
                     zipFile.extractAll(destination);
                 } 
                 catch (ZipException e) 
@@ -296,5 +309,55 @@ public class ScratchLoader
             }
         }
     }   
+
+     /**
+     * getDirectoryContents -Returns the contents of the specified directory 
+     *  as a list of Path objects.
+     * @param inputFileDir -The input directory to list contents of.
+     * @return fileNames -The list of files in the specified 
+     *  directory as Path objects. 
+     */
+    public static List<Path> getDirectoryContents(Path inputFileDir)
+    {
+        //Create container for path objects:
+        List<Path> fileNames = new ArrayList();
+        //Verify path existance:
+        Path cwd;
+        try 
+        {
+            cwd = inputFileDir.toRealPath();
+            // Check to see if absolute path is readable:
+            if (Files.isReadable(cwd)) 
+            {
+                // Iterate every file in dir and record path objects:
+                try (DirectoryStream<Path> 
+                    dirStream = Files.newDirectoryStream(
+                            Paths.get(cwd.toString()))) 
+                {
+                    for (Path path : dirStream) 
+                    {
+                        fileNames.add(path);
+                    }
+                } 
+                catch (IOException ioe) 
+                {
+                    System.err.format("%s%n", ioe);
+                }
+            } 
+            else 
+            {
+                System.err.format("Unreadable Path %s", cwd);
+            }
+        } 
+        catch (NoSuchFileException nsfe) 
+        {
+            System.err.format("%s: no such" + "file or directory%n", nsfe);
+        } 
+        catch (IOException ioe) 
+        {
+            System.err.format("%s%n", ioe);
+        }
+        return fileNames;
+    }
 
 }
