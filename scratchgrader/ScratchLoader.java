@@ -61,8 +61,8 @@ public class ScratchLoader
             if (Files.isReadable(cwd)) 
             {
                 // Iterate every file in dir and record path objects:
-                try (DirectoryStream<Path> dirStream = 
-                        Files.newDirectoryStream(
+                try (DirectoryStream<Path> 
+                    dirStream = Files.newDirectoryStream(
                             Paths.get(cwd.toString()))) 
                 {
                     for (Path path : dirStream) 
