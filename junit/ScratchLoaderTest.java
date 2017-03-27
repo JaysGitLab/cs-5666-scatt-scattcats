@@ -1,7 +1,9 @@
 package junit;
+import java.nio.file.Path;
+import java.nio.file.FileSystems;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-//import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
 
@@ -13,28 +15,34 @@ import scratchgrader.ScratchLoader;
  **/
 public class ScratchLoaderTest 
 {
-   /**
-    * testCommandLineParse -Tests the ability of the program to parse 
-    *  command line arguments.
-    *
+    /**
+    * testScratchLoaderConstructorSucess -Tests the initialization of 
+    *  the ScratchLoader program.
     */
     @Test
-    public void testCommandLineParse() 
+    public void testScratchLoaderConstructorSuccess()
     {
-        String cmdArg = "scratchFiles/my-scratch-file";
-        ScratchLoader loader = new ScratchLoader(cmdArg);
-        //assertEquals(loader.get_file_input_dir(), cmd_arg);
+        //get current working directory path:
+        Path inputFilePath = FileSystems.getDefault().getPath(
+            "scratchFiles", "Animate the Crab.sb2");
+        //System.out.println(new File(".").getCanonicalPath()); 
+        //String inputDir = "../scratchFiles/Animate the Crab.sb2";
+        ScratchLoader loader = new ScratchLoader(inputFilePath.toString());
+        assertEquals(loader.getFileInputDir(), inputFilePath);
     }
     /**
-     * testGetFileLocationSP2
-     * Tests the ability of the program to find a single SP2 file.
-    */
+     * testScratchLoaderConstructorFailure -Tests the initialization of 
+     *  the ScratchLoader program with a non-existant input directory.
+     */
     @Test
-    public void testGetFileLocationSP2() 
+    public void testScratchLoaderConstructorFailure()
     {
-        //TODO: Write test method for single .sp2 file in container dir.
+        //get current working directory path:
+        Path inputFilePath = FileSystems.getDefault().getPath(
+            "scratchFiles", "no-file.sb2");
+        ScratchLoader loader = new ScratchLoader(inputFilePath.toString());
+        assertEquals(loader.getFileInputDir(), null);
     }
-
     /**
     * Test to determine whether a file has a .sb2 extension.
     */
