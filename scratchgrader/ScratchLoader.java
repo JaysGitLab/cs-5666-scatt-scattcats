@@ -1,5 +1,6 @@
 package scratchgrader;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import io.restassured.path.json.JsonPath;
 import java.io.File;
 import java.util.Arrays;
@@ -10,8 +11,11 @@ import net.lingala.zip4j.core.ZipFile;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
