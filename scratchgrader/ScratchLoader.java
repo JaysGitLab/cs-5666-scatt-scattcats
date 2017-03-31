@@ -278,17 +278,17 @@ public class ScratchLoader
             String[] parts = fileName.split("\\.");
             String folderName = parts[0]; 
             String type;
-            if (parts.length > 1)
+        if (parts.length > 1)
 	        {
                 type = parts[1];
             }
-	        else
-	        {
+	    else
+	    {
                 type = " ";
-	        }
+	    }
             if (type.equals("zip"))
             {
-		        String source = inputFileDirectory.toString() + "/"
+		    String source = inputFileDirectory.toString() + "/"
                     + folderName + "." + type;
                 String destination = inputFileDirectory.toString() 
                     + "/" + folderName;
