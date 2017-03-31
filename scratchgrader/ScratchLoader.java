@@ -8,10 +8,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.core.ZipFile;
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -273,27 +270,28 @@ public class ScratchLoader
     public static void unzipFile()
     {
         
-        List<Path> files = getDirectoryContents
-            (inputFileDirectory);       
+        List<Path> files = getDirectoryContents(inputFileDirectory);       
         for (int i = 0; i < files.size(); i++)
         {
             String fileName = files.get(i)
-                .getName(files.get(i).getNameCount()-1).toString();
+                .getName(files.get(i).getNameCount() - 1).toString();
             String[] parts = fileName.split("\\.");
             String folderName = parts[0]; 
             String type;
             if (parts.length > 1)
 	    {
                 type = parts[1];
-            }
+        }
 	    else
 	    {
                 type = " ";
 	    }
             if (type.equals("zip"))
             {
-		String source = inputFileDirectory.toString() + "/" + folderName + "." + type;
-                String destination = inputFileDirectory.toString() + "/" + folderName;
+		        String source = inputFileDirectory.toString() + "/"
+                     + folderName + "." + type;
+                String destination = inputFileDirectory.toString() 
+                    + "/" + folderName;
                 new File(destination).mkdir();
                 try 
                 {
