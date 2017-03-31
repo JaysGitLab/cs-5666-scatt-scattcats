@@ -2,6 +2,9 @@ package junit;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import java.io.File;
+import java.nio.file.Path;
+import java.util.List;
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
@@ -83,5 +86,34 @@ public class ScratchLoaderTest
 	{
             System.out.println(e);
 	}
+    }
+
+    /**
+    * Test to unzip a file.
+    *
+    */	
+    @Test
+    public void testUnzip()
+    {
+        String cmdArg = "scratchFiles/Animate the Crab";
+        ScratchLoader loader = new ScratchLoader(cmdArg);
+        File file = new File(loader.toString());
+        if (file.exists())
+        {
+            List<Path> files = loader.
+                getDirectoryContents(loader.getFileInputDir());
+            for (int i = 0; i < files.size(); i++)
+            {
+                File tempFile = new 
+                    File(files.get(i).toString());
+                tempFile.delete();
+            }
+            file.delete();
+        }
+        cmdArg = "scratchFiles";
+        loader = new ScratchLoader(cmdArg);
+        loader.unzipFile();
+	file = new File("scratchFiles/Animate the Crab");
+	assertTrue(file.exists());
     }
 }
