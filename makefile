@@ -54,4 +54,3 @@ $(JUNIT_LOCAL): jars
 	curl $(JUNIT_URI) -o $(JUNIT_LOCAL) --silent --location
 $(HAMCREST_LOCAL): jars
 	curl $(HAMCREST_URI) -o $(HAMCREST_LOCAL) --silent --location
-
