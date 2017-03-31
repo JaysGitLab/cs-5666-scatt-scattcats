@@ -100,10 +100,10 @@ public class ScratchLoaderTest
     @Test
     public void testUnzip()
     {
-         String cmdArg = "scratchFiles/Animate the Crab";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
+        String cmdArg = "scratchFiles/Animate the Crab";
+        ScratchLoader loader = new ScratchLoader(cmdArg);
         File file = new File(loader.toString());
-        if(file.exists())
+        if (file.exists())
         {
             List<Path> files = loader.
                 getDirectoryContents(loader.getFileInputDir());
