@@ -2,7 +2,11 @@ package scratchgrader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.io.File;
+import java.nio.file.NoSuchFileException;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.util.List;
+import java.util.ArrayList;
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
@@ -39,17 +43,55 @@ public class ScratchLoader
         //Path[] sb2FilePaths = getFilePathsSB2(this.inputFileDirectory);
     }
     /**
-     * getNumberOfFiles -Returns the number of files in the specified directory,
-     *  does not recurse. 
-     * @param verifiedInputFileDirectory -The file path to the input 
-     *  directory that has already been validated for existance.
-     * @return numFiles -The number of files in the specified directory.
+     * getDirectoryContents -Returns the contents of the specified directory 
+     *  as a list of Path objects.
+     * @param inputFileDir -The input directory to list contents of.
+     * @return fileNames -The list of files in the specified 
+     *  directory as Path objects. 
      */
-    public int getNumberOfFiles(Path verifiedInputFileDirectory) 
+    public static List<Path> getDirectoryContents(Path inputFileDir)
     {
-        File tempFileObj = new File(verifiedInputFileDirectory.toString());
-        return tempFileObj.listFiles().length;
+        //Create container for path objects:
+        List<Path> fileNames = new ArrayList();
+        //Verify path existance:
+        Path cwd;
+        try 
+        {
+            cwd = inputFileDir.toRealPath();
+            // Check to see if absolute path is readable:
+            if (Files.isReadable(cwd)) 
+            {
+                // Iterate every file in dir and record path objects:
+                try (DirectoryStream<Path> 
+                    dirStream = Files.newDirectoryStream(
+                            Paths.get(cwd.toString()))) 
+                {
+                    for (Path path : dirStream) 
+                    {
+                        fileNames.add(path);
+                    }
+                } 
+                catch (IOException ioe) 
+                {
+                    System.err.format("%s%n", ioe);
+                }
+            } 
+            else 
+            {
+                System.err.format("Unreadable Path %s", cwd);
+            }
+        } 
+        catch (NoSuchFileException nsfe) 
+        {
+            System.err.format("%s: no such" + "file or directory%n", nsfe);
+        } 
+        catch (IOException ioe) 
+        {
+            System.err.format("%s%n", ioe);
+        }
+        return fileNames;
     }
+
     /**
      * getFilePathsSB2 -Returns an array of file paths pointing to the .sb2 
      *  files in the provided input file directory.
@@ -60,10 +102,6 @@ public class ScratchLoader
      */
     public Path[] getFilePathsSB2(Path verifiedInputFileDirectory) 
     {
-        int numberOfFiles = getNumberOfFiles(verifiedInputFileDirectory);
-        Path[] sb2FilePaths = new Path[numberOfFiles];
-        //TODO: Iterate through every file in the verfied input 
-        //  directory and detect sb2 files:
         return null;
     }
     /**
