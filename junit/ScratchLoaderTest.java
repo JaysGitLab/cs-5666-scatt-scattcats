@@ -9,8 +9,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import java.io.File;
 import java.nio.file.Path;
+import io.restassured.path.json.JsonPath;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
+import scratchgrader.Sprite;
 
 /**
  * ScratchLoaderTest.java
@@ -172,6 +174,7 @@ public class ScratchLoaderTest
     * Test to create a sprite Object.
     *
     */
+    @Test
     public void testSpriteConstructor()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
@@ -182,13 +185,14 @@ public class ScratchLoaderTest
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
         Sprite sprite = new Sprite(name, spriteiScripts);
-        assertEquals(sprite, Sprite);
+        assertEquals(sprite.getClass() , Sprite.class);
     }
 
     /**
     * Test to get the Sprite name.
     *
     */
+    @Test
     public void testGetSpriteName()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
@@ -206,6 +210,7 @@ public class ScratchLoaderTest
     * Test to count scripts inside the sprite.
     *
     */
+    @Test
     public void testCountScripts()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
@@ -223,6 +228,7 @@ public class ScratchLoaderTest
     * Test to get the length of the scripts inside the sprite.
     *
     */
+    @Test
     public void testLengthScripts()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
@@ -234,6 +240,8 @@ public class ScratchLoaderTest
         Object[]  spriteiScripts = aux.toArray(); 
         Sprite sprite = new Sprite(name, spriteiScripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
-        assertEquals(229, scriptsLength.get(0);
+        int length = 229;
+	int scriptLength =  scriptsLength.get(0);
+	assertEquals(length, scriptLength);
     }
 }
