@@ -17,8 +17,20 @@ JUNIT_LOCAL = jars/$(JUNIT_JAR)
 HAMCREST_JAR = hamcrest-core-1.3.jar
 HAMCREST_URI = http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/$(HAMCREST_JAR)
 HAMCREST_LOCAL = jars/$(HAMCREST_JAR)
+JSON_COMMON = commons-lang3-3.4.jar
+JSON_GROOVY = groovy-json-2.4.6.jar
+GROOVY = groovy-2.4.6.jar
+JSON_PATH = json-path-3.0.2.jar
+JSON_SIMPLE = json-simple-1.1.1.jar
+ZIP_JAR = zip4j_1.3.2.jar
 STYLE_XML = misc/appstate_style.xml
-CLASSPATH = -cp .:$(JUNIT_LOCAL)
+COMMON_LOCAL = jars/$(JSON_COMMON)
+JSONGROOVY_LOCAL =jars/$(JSON_GROOVY)
+GROOVY_LOCAL = jars/$(GROOVY)
+PATH_LOCAL = jars/$(JSON_PATH)
+SIMPLE_LOCAL = jars/$(JSON_SIMPLE)
+ZIP_LOCAL = jars/$(ZIP_JAR)
+CLASSPATH = -cp .:$(JUNIT_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL)
 CC = javac $(CLASSPATH) -Xlint:deprecation
 
 # Teach make how to use javac to convert between .java and .class
@@ -30,10 +42,10 @@ default:
 	@echo "usage: make target"
 	@echo "available targets: compile, test, clean"
 
-compile: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class
+compile: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
-junit/ScratchLoaderTest.class: $(JUNIT_LOCAL)
+junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
 
 style:
 	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java
@@ -43,7 +55,7 @@ clean:
 	rm -f junit/ScratchLoaderTest.class
 
 test: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
-	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest
+	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest
 
 jars:
 	mkdir jars
@@ -54,4 +66,5 @@ $(JUNIT_LOCAL): jars
 	curl $(JUNIT_URI) -o $(JUNIT_LOCAL) --silent --location
 $(HAMCREST_LOCAL): jars
 	curl $(HAMCREST_URI) -o $(HAMCREST_LOCAL) --silent --location
+
 
