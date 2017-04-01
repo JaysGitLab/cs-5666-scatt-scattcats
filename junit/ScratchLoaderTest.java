@@ -10,10 +10,11 @@ import static org.junit.Assert.assertFalse;
 import java.io.File;
 import java.nio.file.Path;
 import io.restassured.path.json.JsonPath;
+import org.junit.After;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
 import scratchgrader.Sprite;
-
+import scratchgrader.ScratchGrader;
 /**
  * ScratchLoaderTest.java
  * Tests the functionality of loading and reading scratch files.
@@ -22,6 +23,8 @@ import scratchgrader.Sprite;
  **/
 public class ScratchLoaderTest 
 {
+     private ScratchGrader project;
+
     /**
     * testScratchLoaderConstructorSucess -Tests the initialization of 
     *  the ScratchLoader program.
@@ -266,7 +269,7 @@ public class ScratchLoaderTest
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
-        assertEquals("Paint with Gobo" , pepe.getProjectName());
+        assertEquals("Paint with Gobo" , project.getProjectName());
     }
 
     /**
@@ -279,6 +282,7 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int count = project.getTotalScriptCount();
+	project = null;
         assertEquals(4 , count);
     }
 
@@ -292,6 +296,17 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int len = project.getTotalScriptLenght();
+	project = null;
         assertEquals(406 , len);
+    }
+
+
+    /**
+    *Clean up for the test.
+    */
+    @After
+    public void cleanUp()
+    {
+    	project = null;   
     }
 }

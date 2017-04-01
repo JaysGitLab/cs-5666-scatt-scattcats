@@ -17,9 +17,9 @@ import java.util.List;
 public class ScratchGrader 
 {
     
-    private static Path inputFileDirectory;
-    private static String projectName;
-    private static List<Sprite> sprites = new ArrayList<Sprite>();
+    private Path inputFileDirectory;
+    private String projectName;
+    private List<Sprite> sprites = new ArrayList<Sprite>();
     /**
      * ScratchGrader - Constructor for objects of type ScratchGrader.
      * @param inputFileDirPath -The file path to the project folder 
