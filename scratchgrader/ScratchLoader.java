@@ -47,6 +47,8 @@ public class ScratchLoader
      * @param inputFileDir -The input directory to list contents of.
      * @return fileNames -The list of files in the specified 
      *  directory as Path objects. 
+     * @source www.adam-bien.com/roller/abien/
+     *  entry/listing_directory_contents_with_jdk 
      */
     public static List<Path> getDirectoryContents(Path inputFileDir)
     {
@@ -99,8 +101,12 @@ public class ScratchLoader
      * @return sb2FilePaths -An array of file paths pointing to the 
      *  .sb2 files in the provided existing directory.
      */
-    public Path[] getFilePathsSB2(Path verifiedInputFileDirectory) 
+    public static List<Path> getFilePathsSB2(Path verifiedInputFileDirectory) 
     {
+        List<Path> sb2Files = getDirectoryContents(verifiedInputFileDirectory);
+        for (Path path : sb2Files) {
+            // extract paths that have the .sb2 file extension.
+        }
         return null;
     }
     /**

@@ -87,5 +87,35 @@ public class ScratchLoaderTest
         //TODO: method body.
         assertEquals(true, true);
     }
+    /**
+     * testGetFilePathsSB2 -Tests the return of .sb2 file paths from the
+     *  specified directory. 
+     */
+    @Test
+    public void testGetFilePathsSB2()
+    {
+        System.out.printf(
+            "\nThis test requires manual validation. "
+            + "Confirm output is only .sb2 files which match the contents of "
+            + "the directory shown below.\n"
+        );
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/scratchFiles");
+        List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
+        System.out.printf(
+            "\tPrinting Contents of Directory <%s>:\n",
+            inputFileDir.toString()
+        );
+        int itemCounter = 0;
+        for (Path fp : sb2Files)
+        {
+            System.out.printf(
+                "\t\tItem: %d\tPath: %s\n",
+                itemCounter, fp.toString()
+            );
+            itemCounter++;
+        }
+        assertEquals(true, true);
+    }
 }
 
