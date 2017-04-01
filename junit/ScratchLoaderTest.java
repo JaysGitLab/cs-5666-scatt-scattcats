@@ -241,7 +241,7 @@ public class ScratchLoaderTest
         Sprite sprite = new Sprite(name, spriteiScripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
         int length = 229;
-	int scriptLength =  scriptsLength.get(0);
-	assertEquals(length, scriptLength);
+	    int scriptLength =  scriptsLength.get(0);
+	    assertEquals(length, scriptLength);
     }
 }
