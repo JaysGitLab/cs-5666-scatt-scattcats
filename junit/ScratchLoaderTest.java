@@ -229,7 +229,7 @@ public class ScratchLoaderTest
     *
     */
     @Test
-    public void testLengthScripts()
+    public void make()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
@@ -243,5 +243,55 @@ public class ScratchLoaderTest
         int length = 229;
 	    int scriptLength =  scriptsLength.get(0);
 	    assertEquals(length, scriptLength);
+    }
+
+    /**
+    * Test to create a ScratchGrader Object.
+    *
+    */
+    @Test
+    public void testScratchGraderConstructor()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        assertEquals(project.getClass() , ScratchGrader.class);
+    }
+
+    /**
+    * Test to get the scratch project name.
+    *
+    */
+    @Test
+    public void testgetProjectName()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        assertEquals("Paint with Gobo" , pepe.getProjectName());
+    }
+
+    /**
+    * Test to count scripts inside the scratch project.
+    *
+    */
+    @Test
+    public void testgetTotalScriptCount()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        int count = project.getTotalScriptCount();
+        assertEquals(4 , count);
+    }
+
+     /**
+    * Test to get the length of the scripts inside the scratch project.
+    *
+    */
+    @Test
+    public void testgetTotalScriptLenght()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        int len = project.getTotalScriptLenght();
+        assertEquals(406 , len);
     }
 }
