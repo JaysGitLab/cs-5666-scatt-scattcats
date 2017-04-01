@@ -45,7 +45,8 @@ public class ScratchGrader
         File file = new File(inputFileDirectory.toString() + "/project.json");
         List<String> spriteName = JsonPath.
             from(file).get("children.objName");
-        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
         for (int i = 0; i < spriteName.size(); i++)
         {
             String name = spriteName.get(i);

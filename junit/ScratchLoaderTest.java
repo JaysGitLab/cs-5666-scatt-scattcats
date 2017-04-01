@@ -23,7 +23,7 @@ import scratchgrader.ScratchGrader;
  **/
 public class ScratchLoaderTest 
 {
-     private ScratchGrader project;
+    private ScratchGrader project;
 
     /**
     * testScratchLoaderConstructorSucess -Tests the initialization of 
@@ -183,7 +183,8 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
         List<String> spriteName = JsonPath.from(file).get("children.objName");
-        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
@@ -201,7 +202,8 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
         List<String> spriteName = JsonPath.from(file).get("children.objName");
-        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
@@ -219,7 +221,8 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
         List<String> spriteName = JsonPath.from(file).get("children.objName");
-        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
@@ -237,15 +240,16 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
         List<String> spriteName = JsonPath.from(file).get("children.objName");
-        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
         Sprite sprite = new Sprite(name, spriteiScripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
         int length = 229;
-	    int scriptLength =  scriptsLength.get(0);
-	    assertEquals(length, scriptLength);
+	int scriptLength =  scriptsLength.get(0);
+	assertEquals(length, scriptLength);
     }
 
     /**
