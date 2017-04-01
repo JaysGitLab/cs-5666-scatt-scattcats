@@ -104,12 +104,16 @@ public class ScratchLoader
     public static List<Path> getFilePathsSB2(Path verifiedInputFileDirectory) 
     {
         List<Path> sb2Files = new ArrayList();
-        List<Path> dirContents = getDirectoryContents(verifiedInputFileDirectory);
-        for (Path path : dirContents) {
+        List<Path> dirContents = getDirectoryContents(
+            verifiedInputFileDirectory
+        );
+        for (Path path : dirContents) 
+        {
             // get the file extension of the file:
             int extensionIndex = path.toString().indexOf('.');
             String fileExt = path.toString().substring(extensionIndex);
-            if (fileExt.equals(".sb2")) {
+            if (fileExt.equals(".sb2")) 
+            {
                 sb2Files.add(path);
             }
         }
