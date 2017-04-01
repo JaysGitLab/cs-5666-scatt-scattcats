@@ -14,7 +14,8 @@ import java.util.List;
  * @author Eric Cambel
  * @version 3/22/2017
  */
-public class ScratchGrader {
+public class ScratchGrader 
+{
     
     private static Path inputFileDirectory;
     private static String projectName;
@@ -39,16 +40,18 @@ public class ScratchGrader {
             //);
             this.inputFileDirectory = null;
         }
-        this.projectName = inputFileDirectory.getName(inputFileDirectory.getNameCount() - 1).toString();        
-        File file = new File(inputFileDirectory.toString() + "\\project.json");
-        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        this.projectName = inputFileDirectory.
+            getName(inputFileDirectory.getNameCount() - 1).toString();        
+        File file = new File(inputFileDirectory.toString() + "/project.json");
+        List<String> spriteName = JsonPath.
+            from(file).get("children.objName");
         List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
         for (int i = 0; i < spriteName.size(); i++)
         {
             String name = spriteName.get(i);
             List<String>  aux =  spriteScripts.get(i);
             Object[]  spriteiScripts = aux.toArray(); 
-            Sprite sprite = new Sprite(name,spriteiScripts);
+            Sprite sprite = new Sprite(name, spriteiScripts);
             this.sprites.add(sprite);
         }
         
@@ -61,7 +64,7 @@ public class ScratchGrader {
      */
     public String getProjectName()
     {
-      return this.projectName;
+        return this.projectName;
     }
     
     /**
@@ -74,7 +77,7 @@ public class ScratchGrader {
         int count = 0;
         for (int i = 0; i < this.sprites.size(); i++)
         {
-           count = count +  this.sprites.get(i).countScripts();
+            count = count +  this.sprites.get(i).countScripts();
         }
         return count;
     }
@@ -89,11 +92,11 @@ public class ScratchGrader {
         int count = 0;
         for (int i = 0; i < this.sprites.size(); i++)
         {
-           List<Integer> aux = this.sprites.get(i).lengthScripts();
-           for (int j = 0; j < aux.size(); j++)
-           {
-               count = count + aux.get(j);
-           }
+            List<Integer> aux = this.sprites.get(i).lengthScripts();
+            for (int j = 0; j < aux.size(); j++)
+            {
+                count = count + aux.get(j);
+            }
         }
         return count;
     }

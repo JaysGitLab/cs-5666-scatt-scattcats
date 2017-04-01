@@ -168,4 +168,72 @@ public class ScratchLoaderTest
 	file = new File("scratchFiles/Animate the Crab");
 	assertTrue(file.exists());
     }
+    /**
+    * Test to create a sprite Object.
+    *
+    */
+    public void testSpriteConstructor()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        assertEquals(sprite, Sprite);
+    }
+
+    /**
+    * Test to get the Sprite name.
+    *
+    */
+    public void testGetSpriteName()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        assertEquals("Choose", sprite.getSpriteName());
+    }
+
+    /**
+    * Test to count scripts inside the sprite.
+    *
+    */
+    public void testCountScripts()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        assertEquals(2, sprite.countScripts());
+    }
+
+     /**
+    * Test to get the length of the scripts inside the sprite.
+    *
+    */
+    public void testLengthScripts()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        List<Integer> scriptsLength = sprite.lengthScripts();
+        assertEquals(229, scriptsLength.get(0);
+    }
 }

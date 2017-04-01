@@ -1,9 +1,5 @@
 package scratchgrader;
 import io.restassured.path.json.JsonPath;
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +11,8 @@ import java.util.List;
  * @author Eric Cambel
  * @version 3/22/2017
  */
-public class Sprite {
+public class Sprite 
+{
 
     private String name;
     private Object[] scripts;
@@ -29,6 +26,16 @@ public class Sprite {
     {
         this.name = name;
         this.scripts = scripts;
+    }
+
+    /**
+     * getSpriteName - Get the name of the Sprite.
+     *
+     * @return String - name of the Sprite
+     */
+    public String getSpriteName()
+    {
+        return this.name;
     }
     
     /**
