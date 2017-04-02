@@ -4,11 +4,10 @@ import java.nio.file.Paths;
 import java.nio.file.FileSystems;
 import org.junit.Test;
 import java.util.List;
+import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-import java.io.File;
-import java.nio.file.Path;
 import io.restassured.path.json.JsonPath;
 import org.junit.After;
 //import static org.junit.Assert.assertNotSame;
@@ -96,9 +95,39 @@ public class ScratchLoaderTest
         //TODO: method body.
         assertEquals(true, true);
     }
-   /**
-    * Test to determine whether a file has a .sb2 extension.
-    */
+    /**
+     * testGetFilePathsSB2 -Tests the return of .sb2 file paths from the
+     *  specified directory. 
+     */
+    @Test
+    public void testGetFilePathsSB2()
+    {
+        System.out.printf(
+            "\nThis test requires manual validation. "
+            + "Confirm output is only .sb2 files which match the contents of "
+            + "the directory shown below.\n"
+        );
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/scratchFiles");
+        List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
+        System.out.printf(
+            "\tPrinting Contents of Directory <%s>:\n",
+            inputFileDir.toString()
+        );
+        int itemCounter = 0;
+        for (Path fp : sb2Files)
+        {
+            System.out.printf(
+                "\t\tItem: %d\tPath: %s\n",
+                itemCounter, fp.toString()
+            );
+            itemCounter++;
+        }
+        assertEquals(true, true);
+    }
+    /**
+     * Test to determine whether a file has a .sb2 extension.
+     */
     @Test
     public void testSB2Extension()
     {
@@ -106,72 +135,97 @@ public class ScratchLoaderTest
         ScratchLoader loader = new ScratchLoader(cmdArg);
         assertTrue(loader.checkSB2Extension());
     }
-    
     /**
-    *Test to check is media files are there.
-    *
-    */	
+    * testConvertToZip -Tests the ability of the convertToZip method.
+    */
     @Test
-    public void testMediaCheck()
+    public void testConvertToZip() 
     {
-	try 
-        {
-	    String cmdArg = "scratchFiles/Paint with Gobo";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
-	    assertTrue(loader.checkMediaReferences());
-	}
-	catch (Exception e)
-	{
-            System.out.println(e);
-	}
-    }
+        // Makes directory and contents.
+        int cZip = 0;
+        int cSb2 = 0;
+        String dirName  = "testScratchFiles";
 
-    /**
-    * Fail test to check is media files are there.
-    *
-    */	
-    @Test
-    public void testMediaCheckFail()
-    {
-	try
-        {
-	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
-	    assertFalse(loader.checkMediaReferences());
-	}
-	catch (Exception e)
-	{
-            System.out.println(e);
-	}
-    }
+        makeTempDirectory(dirName);
 
-    /**
-    * Test to unzip a file.
-    *
-    */	
-    @Test
-    public void testUnzip()
-    {
-        String cmdArg = "scratchFiles/Animate the Crab";
-        ScratchLoader loader = new ScratchLoader(cmdArg);
-        File file = new File(loader.toString());
-        if (file.exists())
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/" + dirName);
+
+        List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
+        ScratchLoader.convertToZip(sb2Files);
+
+        List<Path> dirContents = ScratchLoader
+        .getDirectoryContents(inputFileDir);
+
+        for (Path fp : dirContents) 
         {
-            List<Path> files = loader.
-                getDirectoryContents(loader.getFileInputDir());
-            for (int i = 0; i < files.size(); i++)
+            String fname = fp.toString();
+            for (Path sb2Fp : sb2Files)
             {
-                File tempFile = new 
-                    File(files.get(i).toString());
-                tempFile.delete();
+                if (fname.equals(sb2Fp.toString()))
+                {
+                    cSb2++;
+                }
             }
-            file.delete();
+            String zname = fname.substring(0, fname.length() - 3) + "zip";
+
+            if (zname.equals(fp.toString()))
+            {
+                cZip++;
+            }
         }
-        cmdArg = "scratchFiles";
-        loader = new ScratchLoader(cmdArg);
-        loader.unzipFile();
-	file = new File("scratchFiles/Animate the Crab");
-	assertTrue(file.exists());
+
+        //TODO: finish test.
+        assertTrue(cSb2 == cZip);
+
+        // Deletes both directory and contents.
+        File dir = new File(dirName);
+        deleteDirectory(dir);
+    }
+
+	
+    /**
+    *	Helper method to make a temp directory with fake files.
+    *	@param dirName is the name of the directory to be made.
+    **/
+    public static void makeTempDirectory(String dirName)
+    {
+        // Makes a new temp directory
+        new File(dirName).mkdir();
+        File dir = new File(dirName);
+        //TODO: Make more dynamic for use in other methods.
+        try 
+        {
+            File a = File.createTempFile("test1", ".sb2", dir);
+            File b = File.createTempFile("test2", ".sb2", dir);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+	
+    /**
+    * Helper method to delete temp directories.
+    * @param dir is a file directory.
+    * @return boolean value of deleting something.
+    */
+    public static boolean deleteDirectory(File dir) 
+    {
+        if (dir.isDirectory()) 
+        {
+            File[] children = dir.listFiles();
+            for (int i = 0; i < children.length; i++) 
+            {
+                boolean success = deleteDirectory(children[i]);
+                if (!success) 
+                {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
     }
     /**
     * Test to create a sprite Object.
@@ -314,3 +368,4 @@ public class ScratchLoaderTest
     	project = null;   
     }
 }
+
