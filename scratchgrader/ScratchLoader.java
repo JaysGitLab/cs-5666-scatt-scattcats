@@ -82,7 +82,7 @@ public class ScratchLoader
                 } 
                 catch (IOException ioe) 
                 {
-                    System.err.format("%s%n", ioe);
+                    System.err.format("%s\n", ioe);
                 }
             } 
             else 
@@ -96,7 +96,7 @@ public class ScratchLoader
         } 
         catch (IOException ioe) 
         {
-            System.err.format("%s%n", ioe);
+            System.err.format("%s\n", ioe);
         }
         return fileNames;
     }
@@ -119,10 +119,12 @@ public class ScratchLoader
         {
             // get the file extension of the file:
             int extensionIndex = path.toString().indexOf('.');
-            String fileExt = path.toString().substring(extensionIndex);
-            if (fileExt.equals(".sb2")) 
-            {
-                sb2Files.add(path);
+            if (extensionIndex > 0) {
+                String fileExt = path.toString().substring(extensionIndex);
+                if (fileExt.equals(".sb2")) 
+                {
+                    sb2Files.add(path);
+                }
             }
         }
         return sb2Files;

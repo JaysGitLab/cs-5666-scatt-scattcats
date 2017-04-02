@@ -105,6 +105,7 @@ public class ScratchLoaderTest
         );
         Path inputFileDir = Paths.get(
             System.getProperty("user.dir") + "/scratchFiles");
+        System.out.printf("DEBUG: inputFileDir = %s", inputFileDir.toString());
         List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
         System.out.printf(
             "\tPrinting Contents of Directory <%s>:\n",
