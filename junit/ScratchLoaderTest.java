@@ -7,9 +7,13 @@ import java.util.List;
 import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import io.restassured.path.json.JsonPath;
+import org.junit.After;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
-
+import scratchgrader.Sprite;
+import scratchgrader.ScratchGrader;
 /**
  * ScratchLoaderTest.java
  * Tests the functionality of loading and reading scratch files.
@@ -18,6 +22,8 @@ import scratchgrader.ScratchLoader;
  **/
 public class ScratchLoaderTest 
 {
+    private ScratchGrader project;
+
     /**
     * testScratchLoaderConstructorSucess -Tests the initialization of 
     *  the ScratchLoader program.
@@ -220,6 +226,146 @@ public class ScratchLoaderTest
         }
 
         return dir.delete();
+    }
+    /**
+    * Test to create a sprite Object.
+    *
+    */
+    @Test
+    public void testSpriteConstructor()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        assertEquals(sprite.getClass() , Sprite.class);
+    }
+
+    /**
+    * Test to get the Sprite name.
+    *
+    */
+    @Test
+    public void testGetSpriteName()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        assertEquals("Choose", sprite.getSpriteName());
+    }
+
+    /**
+    * Test to count scripts inside the sprite.
+    *
+    */
+    @Test
+    public void testCountScripts()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        assertEquals(2, sprite.countScripts());
+    }
+
+     /**
+    * Test to get the length of the scripts inside the sprite.
+    *
+    */
+    @Test
+    public void testLengthScripts()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        File file = new File(cmdArg + "/project.json");       
+        List<String> spriteName = JsonPath.from(file).get("children.objName");
+        List<List<String>>  spriteScripts = 
+            JsonPath.from(file).get("children.scripts");
+        String name = spriteName.get(0);
+        List<String>  aux =  spriteScripts.get(0);
+        Object[]  spriteiScripts = aux.toArray(); 
+        Sprite sprite = new Sprite(name, spriteiScripts);
+        List<Integer> scriptsLength = sprite.lengthScripts();
+        int length = 229;
+	int scriptLength =  scriptsLength.get(0);
+	assertEquals(length, scriptLength);
+    }
+
+    /**
+    * Test to create a ScratchGrader Object.
+    *
+    */
+    @Test
+    public void testScratchGraderConstructor()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        assertEquals(project.getClass() , ScratchGrader.class);
+    }
+
+    /**
+    * Test to get the scratch project name.
+    *
+    */
+    @Test
+    public void testgetProjectName()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        assertEquals("Paint with Gobo" , project.getProjectName());
+    }
+
+    /**
+    * Test to count scripts inside the scratch project.
+    *
+    */
+    @Test
+    public void testgetTotalScriptCount()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        int count = project.getTotalScriptCount();
+	project = null;
+        assertEquals(4 , count);
+    }
+
+     /**
+    * Test to get the length of the scripts inside the scratch project.
+    *
+    */
+    @Test
+    public void testgetTotalScriptLength()
+    {
+        String cmdArg = "scratchFiles/Paint with Gobo";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        int len = project.getTotalScriptLenght();
+	project = null;
+        assertEquals(406 , len);
+    }
+
+
+    /**
+    *Clean up for the test.
+    */
+    @After
+    public void cleanUp()
+    {
+    	project = null;   
     }
 }
 
