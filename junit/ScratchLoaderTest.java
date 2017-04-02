@@ -6,9 +6,6 @@ import org.junit.Test;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import java.io.File;
-import java.nio.file.Path;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
 
@@ -91,9 +88,40 @@ public class ScratchLoaderTest
         //TODO: method body.
         assertEquals(true, true);
     }
-   /**
-    * Test to determine whether a file has a .sb2 extension.
-    */
+    /**
+     * testGetFilePathsSB2 -Tests the return of .sb2 file paths from the
+     *  specified directory. 
+     */
+    @Test
+    public void testGetFilePathsSB2()
+    {
+        System.out.printf(
+            "\nThis test requires manual validation. "
+            + "Confirm output is only .sb2 files which match the contents of "
+            + "the directory shown below.\n"
+        );
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/scratchFiles");
+        System.out.printf("DEBUG: inputFileDir = %s", inputFileDir.toString());
+        List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
+        System.out.printf(
+            "\tPrinting Contents of Directory <%s>:\n",
+            inputFileDir.toString()
+        );
+        int itemCounter = 0;
+        for (Path fp : sb2Files)
+        {
+            System.out.printf(
+                "\t\tItem: %d\tPath: %s\n",
+                itemCounter, fp.toString()
+            );
+            itemCounter++;
+        }
+        assertEquals(true, true);
+    }
+    /**
+     * Test to determine whether a file has a .sb2 extension.
+     */
     @Test
     public void testSB2Extension()
     {
@@ -101,71 +129,5 @@ public class ScratchLoaderTest
         ScratchLoader loader = new ScratchLoader(cmdArg);
         assertTrue(loader.checkSB2Extension());
     }
-    
-    /**
-    *Test to check is media files are there.
-    *
-    */	
-    @Test
-    public void testMediaCheck()
-    {
-	try 
-        {
-	    String cmdArg = "scratchFiles/Paint with Gobo";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
-	    assertTrue(loader.checkMediaReferences());
-	}
-	catch (Exception e)
-	{
-            System.out.println(e);
-	}
-    }
-
-    /**
-    * Fail test to check is media files are there.
-    *
-    */	
-    @Test
-    public void testMediaCheckFail()
-    {
-	try
-        {
-	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
-            ScratchLoader loader = new ScratchLoader(cmdArg);
-	    assertFalse(loader.checkMediaReferences());
-	}
-	catch (Exception e)
-	{
-            System.out.println(e);
-	}
-    }
-
-    /**
-    * Test to unzip a file.
-    *
-    */	
-    @Test
-    public void testUnzip()
-    {
-        String cmdArg = "scratchFiles/Animate the Crab";
-        ScratchLoader loader = new ScratchLoader(cmdArg);
-        File file = new File(loader.toString());
-        if (file.exists())
-        {
-            List<Path> files = loader.
-                getDirectoryContents(loader.getFileInputDir());
-            for (int i = 0; i < files.size(); i++)
-            {
-                File tempFile = new 
-                    File(files.get(i).toString());
-                tempFile.delete();
-            }
-            file.delete();
-        }
-        cmdArg = "scratchFiles";
-        loader = new ScratchLoader(cmdArg);
-        loader.unzipFile();
-	file = new File("scratchFiles/Animate the Crab");
-	assertTrue(file.exists());
-    }
 }
+
