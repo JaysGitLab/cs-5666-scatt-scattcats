@@ -235,7 +235,7 @@ public class ScratchLoaderTest
     *
     */
     @Test
-    public void make()
+    public void testLengthScripts()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
@@ -295,7 +295,7 @@ public class ScratchLoaderTest
     *
     */
     @Test
-    public void testgetTotalScriptLenght()
+    public void testgetTotalScriptLength()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
