@@ -135,19 +135,6 @@ public class ScratchLoader
         return inputFileDirectory;    
     }
     /**
-     * identifySP2Locations -Returns the file paths 
-     *  associated with every .sp2 file in the 
-     *  specified input directory.
-     * @return sp2_paths -The list of file paths
-     *  where every .sp2 file can be found. 
-    **/
-    private Path[] identifySP2Locations()
-    {
-        //TODO: write method body. 
-        return null;
-    }
-
-    /**
     *   Method to aid in determining whether a file from
     *   the program is a .sb2 file extension.
     *   @return boolean the analysis of the .sb2 file.

@@ -102,7 +102,6 @@ public class ScratchLoaderTest
         );
         Path inputFileDir = Paths.get(
             System.getProperty("user.dir") + "/scratchFiles");
-        System.out.printf("DEBUG: inputFileDir = %s", inputFileDir.toString());
         List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
         System.out.printf(
             "\tPrinting Contents of Directory <%s>:\n",
@@ -129,5 +128,20 @@ public class ScratchLoaderTest
         ScratchLoader loader = new ScratchLoader(cmdArg);
         assertTrue(loader.checkSB2Extension());
     }
+    /**
+     * testConvertToZip -Tests the ability of the convertToZip method.
+     */
+    @Test
+    public void testConvertToZip() {
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/scratchFiles");
+        List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
+        List<Path> zipFiles;
+        for (Path fp : sb2Files) {
+            String fname = fp.toString();
+        }
+    }
+    //TODO: finish test.
+    assertTrue(false);
 }
 
