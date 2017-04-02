@@ -130,85 +130,84 @@ public class ScratchLoaderTest
         assertTrue(loader.checkSB2Extension());
     }
     /**
-     * testConvertToZip -Tests the ability of the convertToZip method.
-     */
+    * testConvertToZip -Tests the ability of the convertToZip method.
+    */
     @Test
     public void testConvertToZip() 
-	{
-		// Makes directory and contents.
-		int cZip = 0;
-		int cSb2 = 0;
-		String dirName  = "testScratchFiles";
-		
-		makeTempDirectory(dirName);
-		
+    {
+        // Makes directory and contents.
+        int cZip = 0;
+        int cSb2 = 0;
+        String dirName  = "testScratchFiles";
+
+        makeTempDirectory(dirName);
+
         Path inputFileDir = Paths.get(
             System.getProperty("user.dir") + "/" + dirName);
-		
+
         List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
         ScratchLoader.convertToZip(sb2Files);
-	
-		List<Path> dirContents = ScratchLoader
-			.getDirectoryContents(inputFileDir);
-	   
-		for (Path fp : dirContents) 
-		{
-			String fname = fp.toString();
-			for (Path sb2Fp : sb2Files)
-			{
-				if (fname.equals(sb2Fp.toString()))
-				{
-					cSb2++;
-				}
-			
-			}
-			String zname = fname.substring(0, fname.length() - 3) + "zip";
 
-			if (zname.equals(fp.toString()))
-			{
-				cZip++;
-			}
+        List<Path> dirContents = ScratchLoader
+        .getDirectoryContents(inputFileDir);
+
+        for (Path fp : dirContents) 
+        {
+            String fname = fp.toString();
+            for (Path sb2Fp : sb2Files)
+            {
+                if (fname.equals(sb2Fp.toString()))
+                {
+                    cSb2++;
+                }
+            }
+            String zname = fname.substring(0, fname.length() - 3) + "zip";
+
+            if (zname.equals(fp.toString()))
+            {
+                cZip++;
+            }
         }
 
-		//TODO: finish test.
-		assertTrue(cSb2 == cZip);
-		
-		// Deletes both directory and contents.
-		File dir = new File(dirName);
-		deleteDirectory(dir);
+        //TODO: finish test.
+        assertTrue(cSb2 == cZip);
+
+        // Deletes both directory and contents.
+        File dir = new File(dirName);
+        deleteDirectory(dir);
     }
 
 	
-	/**
-	*	Helper method to make a temp directory with fake files.
-	*	@param dirName is the name of the directory to be made.
-	**/
-	public static void makeTempDirectory(String dirName)
-	{
-		// Makes a new temp directory
-		new File(dirName).mkdir();
-		File dir = new File(dirName);
-		//TODO: Make more dynamic for use in other methods.
-		try 
-		{
-			File a = File.createTempFile("test1", ".sb2", dir);
-			File b = File.createTempFile("test2", ".sb2", dir);
-		}
-		catch (Exception e)
-		{
-			System.out.println(e);
-		}
-	}
+    /**
+    *	Helper method to make a temp directory with fake files.
+    *	@param dirName is the name of the directory to be made.
+    **/
+    public static void makeTempDirectory(String dirName)
+    {
+        // Makes a new temp directory
+        new File(dirName).mkdir();
+        File dir = new File(dirName);
+        //TODO: Make more dynamic for use in other methods.
+        try 
+        {
+            File a = File.createTempFile("test1", ".sb2", dir);
+            File b = File.createTempFile("test2", ".sb2", dir);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 	
-	/**
-	* Helper method to delete temp directories.
-	* @param dir is a file directory.
-	* @return boolean value of deleting something.
-	*/
-	public static boolean deleteDirectory(File dir) 
-	{
-		if (dir.isDirectory()) 
-		{
+    /**
+    * Helper method to delete temp directories.
+    * @param dir is a file directory.
+    * @return boolean value of deleting something.
+    */
+    public static boolean deleteDirectory(File dir) 
+    {
+        if (dir.isDirectory()) 
+        {
             File[] children = dir.listFiles();
             for (int i = 0; i < children.length; i++) 
             {
@@ -221,6 +220,6 @@ public class ScratchLoaderTest
         }
 
         return dir.delete();
-	}
+    }
 }
 
