@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
@@ -135,19 +137,6 @@ public class ScratchLoader
         return inputFileDirectory;    
     }
     /**
-     * identifySP2Locations -Returns the file paths 
-     *  associated with every .sp2 file in the 
-     *  specified input directory.
-     * @return sp2_paths -The list of file paths
-     *  where every .sp2 file can be found. 
-    **/
-    private Path[] identifySP2Locations()
-    {
-        //TODO: write method body. 
-        return null;
-    }
-
-    /**
     *   Method to aid in determining whether a file from
     *   the program is a .sb2 file extension.
     *   @return boolean the analysis of the .sb2 file.
@@ -169,5 +158,37 @@ public class ScratchLoader
         }
         
         return false;
+    }
+	
+    /**
+    *  Method to convert sb2 files to .zip.
+    *
+    *  @param listOfSb2 is a list of sb2 files from a directory.
+    */
+    public static void convertToZip(List<Path> listOfSb2)
+    {	
+        String fname = "";
+        String zipName = "";
+
+        // Grabs the name of the SB2 file and renames it to ZIP
+        // and copies it to the same directory.
+        for (Path fp : listOfSb2) 
+        {
+
+            // fname is the .sb2 file
+            fname = fp.toString();
+            // Renames fname to end with .zip
+            zipName = fname.substring(0, fname.length() - 3) + "zip";
+            Path newPath = Paths.get(zipName);
+
+            try
+            {
+                Files.copy(fp, newPath, REPLACE_EXISTING);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }

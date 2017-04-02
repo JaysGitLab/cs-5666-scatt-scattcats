@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.nio.file.FileSystems;
 import org.junit.Test;
 import java.util.List;
+import java.io.File;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 //import static org.junit.Assert.assertNotSame;
@@ -102,7 +103,6 @@ public class ScratchLoaderTest
         );
         Path inputFileDir = Paths.get(
             System.getProperty("user.dir") + "/scratchFiles");
-        System.out.printf("DEBUG: inputFileDir = %s", inputFileDir.toString());
         List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
         System.out.printf(
             "\tPrinting Contents of Directory <%s>:\n",
@@ -128,6 +128,98 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Animate the Crab.sb2";
         ScratchLoader loader = new ScratchLoader(cmdArg);
         assertTrue(loader.checkSB2Extension());
+    }
+    /**
+    * testConvertToZip -Tests the ability of the convertToZip method.
+    */
+    @Test
+    public void testConvertToZip() 
+    {
+        // Makes directory and contents.
+        int cZip = 0;
+        int cSb2 = 0;
+        String dirName  = "testScratchFiles";
+
+        makeTempDirectory(dirName);
+
+        Path inputFileDir = Paths.get(
+            System.getProperty("user.dir") + "/" + dirName);
+
+        List<Path> sb2Files = ScratchLoader.getFilePathsSB2(inputFileDir);
+        ScratchLoader.convertToZip(sb2Files);
+
+        List<Path> dirContents = ScratchLoader
+        .getDirectoryContents(inputFileDir);
+
+        for (Path fp : dirContents) 
+        {
+            String fname = fp.toString();
+            for (Path sb2Fp : sb2Files)
+            {
+                if (fname.equals(sb2Fp.toString()))
+                {
+                    cSb2++;
+                }
+            }
+            String zname = fname.substring(0, fname.length() - 3) + "zip";
+
+            if (zname.equals(fp.toString()))
+            {
+                cZip++;
+            }
+        }
+
+        //TODO: finish test.
+        assertTrue(cSb2 == cZip);
+
+        // Deletes both directory and contents.
+        File dir = new File(dirName);
+        deleteDirectory(dir);
+    }
+
+	
+    /**
+    *	Helper method to make a temp directory with fake files.
+    *	@param dirName is the name of the directory to be made.
+    **/
+    public static void makeTempDirectory(String dirName)
+    {
+        // Makes a new temp directory
+        new File(dirName).mkdir();
+        File dir = new File(dirName);
+        //TODO: Make more dynamic for use in other methods.
+        try 
+        {
+            File a = File.createTempFile("test1", ".sb2", dir);
+            File b = File.createTempFile("test2", ".sb2", dir);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+	
+    /**
+    * Helper method to delete temp directories.
+    * @param dir is a file directory.
+    * @return boolean value of deleting something.
+    */
+    public static boolean deleteDirectory(File dir) 
+    {
+        if (dir.isDirectory()) 
+        {
+            File[] children = dir.listFiles();
+            for (int i = 0; i < children.length; i++) 
+            {
+                boolean success = deleteDirectory(children[i]);
+                if (!success) 
+                {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
     }
 }
 
