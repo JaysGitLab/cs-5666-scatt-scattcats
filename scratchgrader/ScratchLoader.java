@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 /**
  * ScratchLoader.java
  * Loads all scratch files in the specified directory 
@@ -157,4 +159,36 @@ public class ScratchLoader
         
         return false;
     }
+	
+	/**
+	*  Method to convert sb2 files to .zip.
+	*
+	*  @param listOfSb2 is a list of sb2 files from a directory.
+	*/
+	public static void convertToZip(List<Path> listOfSb2)
+	{	
+		String fname = "";
+		String zipName = "";
+		
+		// Grabs the name of the SB2 file and renames it to ZIP
+		// and copies it to the same directory.
+		for (Path fp : listOfSb2) 
+		{
+			
+			// fname is the .sb2 file
+			fname = fp.toString();
+			// Renames fname to end with .zip
+			zipName = fname.substring(0, fname.length() - 3) + "zip";
+			Path newPath = Paths.get(zipName);
+			
+			try
+			{
+				Files.copy(fp, newPath, REPLACE_EXISTING);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+        }
+	}
 }
