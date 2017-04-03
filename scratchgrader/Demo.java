@@ -1,8 +1,8 @@
 package scratchgrader;
+import java.io.File;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.NoSuchFileException;
 import java.util.List;
 
 public class Demo
@@ -71,15 +71,28 @@ public class Demo
             " directory with the scratch files: ");  
         String dir = reader.nextLine();
         
-        Path inputFileDir = Paths.get(
-            System.getProperty("user.dir") + "/" + dir);
+        Path inputFileDir = Paths.get(dir);
         ScratchLoader loader = new ScratchLoader(inputFileDir.toString());
         
         // If wrong input, it will throw an exception and crash the program
         // TODO: Have the user type in another directory again.
         List<Path> sb2Contents = loader.getFilePathsSB2(inputFileDir);
         loader.convertToZip(sb2Contents);
+        loader.unzipFile();
+        List<Path> projects = loader.getDirectoryContents(loader.getFileInputDir());
         
+        for (int i = 0; i < projects.size(); i++)
+        {
+            File file = new File(projects.get(i).toString());
+            if (file.isDirectory())
+            {
+                if(loader.checkMediaReferences(file.getAbsolutePath()))
+                {
+                   ScratchGrader grader = new ScratchGrader(file.getAbsolutePath());
+                   System.out.println("Project: " + grader.getProjectName() + " | " + "Total Scripts: " + grader.getTotalScriptCount() + " | " + "Total length of the scripts: " + grader.getTotalScriptLenght());
+                }
+            }
+        }
         
     }
 }

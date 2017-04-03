@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 /**
  * ScratchGrader.java
@@ -47,6 +48,8 @@ public class ScratchGrader
             from(file).get("children.objName");
         List<List<String>>  spriteScripts = 
             JsonPath.from(file).get("children.scripts");
+        spriteName.removeAll(Collections.singleton(null));
+        spriteScripts.removeAll(Collections.singleton(null));
         for (int i = 0; i < spriteName.size(); i++)
         {
             String name = spriteName.get(i);
