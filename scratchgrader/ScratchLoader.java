@@ -7,7 +7,6 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.core.ZipFile;
 import java.util.ArrayList;
 import java.nio.file.DirectoryStream;
@@ -373,11 +372,10 @@ public class ScratchLoader
     * and creates the corresponding folder.
     *
     */
-
     public static void unzipFile()
     {
-        
-        List<Path> files = getDirectoryContents(inputFileDirectory);       
+       
+	List<Path> files = getDirectoryContents(inputFileDirectory);       
         for (int i = 0; i < files.size(); i++)
         {
             String fileName = files.get(i)
@@ -394,20 +392,20 @@ public class ScratchLoader
                 type = " ";
 	        }
             if (type.equals("zip"))
-            {
+            {	
 		        String source = inputFileDirectory.toString() + "/"
                     + folderName + "." + type;
                 String destination = inputFileDirectory.toString() 
                     + "/" + folderName;
                 new File(destination).mkdir();
                 try 
-                {
+                {   
                     ZipFile zipFile = new 
                         ZipFile(source);
 		    
                     zipFile.extractAll(destination);
                 } 
-                catch (ZipException e) 
+                catch (Exception e) 
                 {
                     e.printStackTrace();
                 }

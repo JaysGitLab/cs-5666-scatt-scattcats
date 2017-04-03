@@ -4,6 +4,14 @@ import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import scratchgrader.ScratchLoader;
+import scratchgrader.Sprite;
+import net.lingala.zip4j.core.ZipFile;
+import scratchgrader.ScratchGrader;
+import scratchgrader.ScratchLoader;
+import scratchgrader.Sprite;
+import scratchgrader.ScratchGrader;
+
 
 public class Demo
 {
@@ -70,15 +78,12 @@ public class Demo
         System.out.print("Please enter the name of the" +
             " directory with the scratch files: ");  
         String dir = reader.nextLine();
-        
-        Path inputFileDir = Paths.get(dir);
-        ScratchLoader loader = new ScratchLoader(inputFileDir.toString());
-        
+        ScratchLoader loader = new ScratchLoader(dir);
         // If wrong input, it will throw an exception and crash the program
         // TODO: Have the user type in another directory again.
-        List<Path> sb2Contents = loader.getFilePathsSB2(inputFileDir);
+        List<Path> sb2Contents = loader.getFilePathsSB2(loader.getFileInputDir());
         loader.convertToZip(sb2Contents);
-        loader.unzipFile();
+	loader.unzipFile();
         List<Path> projects = loader.getDirectoryContents(loader.getFileInputDir());
         
         for (int i = 0; i < projects.size(); i++)

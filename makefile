@@ -30,7 +30,7 @@ GROOVY_LOCAL = jars/$(GROOVY)
 PATH_LOCAL = jars/$(JSON_PATH)
 SIMPLE_LOCAL = jars/$(JSON_SIMPLE)
 ZIP_LOCAL = jars/$(ZIP_JAR)
-CLASSPATH = -cp .:$(JUNIT_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL)
+CLASSPATH = -cp .:$(JUNIT_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(ZIP_LOCAL):$(SIMPLE_LOCAL)
 CC = javac $(CLASSPATH) -Xlint:deprecation
 
 # Teach make how to use javac to convert between .java and .class
@@ -42,13 +42,20 @@ default:
 	@echo "usage: make target"
 	@echo "available targets: compile, test, clean"
 
-compile: scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/Demo.class junit/ScratchLoaderTest.class 
+compile: scratchgrader/Demo.class scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
 junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
+scratchgrader/ScratchLoader.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
+scratchgrader/Demo.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
+
 
 style:
 	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java scratchgrader/ScratchGrader.java scratchgrader/Sprite.java scratchgrader/Demo.java
+
+run:
+	 java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL) scratchgrader.Demo 
+
 
 clean:
 	rm -f scratchgrader/ScratchLoader.class
