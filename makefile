@@ -42,16 +42,19 @@ default:
 	@echo "usage: make target"
 	@echo "available targets: compile, test, clean"
 
-compile: scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class junit/ScratchLoaderTest.class 
+compile: scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/Demo.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
 junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
 
 style:
-	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java
+	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java scratchgrader/ScratchGrader.java scratchgrader/Sprite.java scratchgrader/Demo.java
 
 clean:
 	rm -f scratchgrader/ScratchLoader.class
+	rm -f scratchgrader/ScratchGrader.class
+	rm -f scratchgrader/Sprite.class
+	rm -f scratchgrader/Demo.class
 	rm -f junit/ScratchLoaderTest.class
 
 test: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
