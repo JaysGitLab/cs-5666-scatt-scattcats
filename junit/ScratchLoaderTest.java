@@ -303,8 +303,8 @@ public class ScratchLoaderTest
         Sprite sprite = new Sprite(name, spriteiScripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
         int length = 229;
-    int scriptLength =  scriptsLength.get(0);
-    assertEquals(length, scriptLength);
+        int scriptLength =  scriptsLength.get(0);
+        assertEquals(length, scriptLength);
     }
 
     /**
@@ -341,7 +341,7 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int count = project.getTotalScriptCount();
-    project = null;
+        project = null;
         assertEquals(4 , count);
     }
 
@@ -355,7 +355,7 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int len = project.getTotalScriptLenght();
-    project = null;
+        project = null;
         assertEquals(406 , len);
     }
 
@@ -367,16 +367,16 @@ public class ScratchLoaderTest
     @Test
     public void testMediaCheckFail()
     {
-    try
+        try
         {
-        String cmdArg = "scratchFiles/Paint with Gobo Fail";
+            String cmdArg = "scratchFiles/Paint with Gobo Fail";
             ScratchLoader loader = new ScratchLoader(cmdArg);
-        assertFalse(loader.checkMediaReferences(cmdArg));
-    }
-    catch (Exception e)
-    {
+            assertFalse(loader.checkMediaReferences(cmdArg));
+        }
+        catch (Exception e)
+        {
             System.out.println(e);
-    }
+        }
     }
 
     /**
@@ -404,12 +404,12 @@ public class ScratchLoaderTest
         cmdArg = "scratchFiles";
         loader = new ScratchLoader(cmdArg);
         loader.unzipFile();
-    file = new File("scratchFiles/Animate the Crab");
-    assertTrue(file.exists());
+        file = new File("scratchFiles/Animate the Crab");
+        assertTrue(file.exists());
     }
 
     /**
-     * Test get Data Variables from one sprite
+     * Test get Data Variables from one sprite.
      */
     @Test
     public void testgetDataVariables()

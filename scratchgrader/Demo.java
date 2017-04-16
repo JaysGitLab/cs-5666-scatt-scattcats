@@ -8,9 +8,8 @@ import scratchgrader.ScratchLoader;
 import scratchgrader.Sprite;
 import net.lingala.zip4j.core.ZipFile;
 import scratchgrader.ScratchGrader;
-import scratchgrader.ScratchLoader;
-import scratchgrader.Sprite;
-import scratchgrader.ScratchGrader;
+
+
 
 
 public class Demo
@@ -43,7 +42,7 @@ public class Demo
         
         Scanner reader = new Scanner(System.in);
         int n = 0;
-        while(true)
+        while (true)
         {
             System.out.print("Select option: ");
 
@@ -75,29 +74,36 @@ public class Demo
     {
         Scanner reader = new Scanner(System.in);
        
-        System.out.print("Please enter the name of the" +
-            " directory with the scratch files: ");  
+        System.out.print("Please enter the name of the" 
+            + " directory with the scratch files: ");  
         String dir = reader.nextLine();
         ScratchLoader loader = new ScratchLoader(dir);
         // If wrong input, it will throw an exception and crash the program
         // TODO: Have the user type in another directory again.
-        List<Path> sb2Contents = loader.getFilePathsSB2(loader.getFileInputDir());
+        List<Path> sb2Contents = loader.
+            getFilePathsSB2(loader.getFileInputDir());
         loader.convertToZip(sb2Contents);
-    loader.unzipFile();
-        List<Path> projects = loader.getDirectoryContents(loader.getFileInputDir());
+        loader.unzipFile();
+        List<Path> projects = loader.
+            getDirectoryContents(loader.getFileInputDir());
         
         for (int i = 0; i < projects.size(); i++)
         {
             File file = new File(projects.get(i).toString());
             if (file.isDirectory())
             {
-                if(loader.checkMediaReferences(file.getAbsolutePath()))
+                if (loader.checkMediaReferences(file.getAbsolutePath()))
                 {
-                   ScratchGrader grader = new ScratchGrader(file.getAbsolutePath());
-                   System.out.println("Project: " + grader.getProjectName() + " | " + "Total Scripts: " + grader.getTotalScriptCount() + " | " + "Total length of the scripts: " + grader.getTotalScriptLenght());
-                   List<Sprite> sprites =  new ArrayList<Sprite>();
-                   sprites = grader.getListOfSprites();
-                   List<String>  spriteOneVariables = sprites.get(0).getAllVaraibles();
+                    ScratchGrader grader = new ScratchGrader
+                        (file.getAbsolutePath());
+                    System.out.println("Project: " + grader.getProjectName() 
+                        + " | " + "Total Scripts: " + grader.getTotalScriptCount() 
+                        + " | " + "Total length of the scripts: " 
+                        + grader.getTotalScriptLenght());
+                    List<Sprite> sprites =  new ArrayList<Sprite>();
+                    sprites = grader.getListOfSprites();
+                    List<String>  spriteOneVariables = 
+                        sprites.get(0).getAllVaraibles();
     
                 }
             }
