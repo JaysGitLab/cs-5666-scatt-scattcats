@@ -1,6 +1,8 @@
 package scratchgrader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Sprite.java
@@ -15,6 +17,7 @@ public class Sprite
 
     private String name;
     private Object[] scripts;
+    private List<String>  dataVaraibles = new ArrayList<String>();
     
     /**
      * Sprite - Constructor for objects of type Sprite.
@@ -25,6 +28,18 @@ public class Sprite
     {
         this.name = name;
         this.scripts = scripts;
+        List<String> changevar = getDataVariables("changeVar");
+        List<String> hidevar = getDataVariables("hideVariable");
+        List<String> showvar = getDataVariables("showVariable");
+        List<String> setvar = getDataVariables("setVar");
+        
+        Set<String> auxSet = new HashSet<>();
+        auxSet.addAll(changevar);
+        auxSet.addAll(hidevar);
+        auxSet.addAll(showvar);
+        auxSet.addAll(setvar);
+        dataVaraibles.addAll(auxSet);
+         
     }
 
     /**
@@ -35,6 +50,16 @@ public class Sprite
     public String getSpriteName()
     {
         return this.name;
+    }
+    
+    /**
+     * getScripts - Get the scripts.
+     *
+     * @return Object[] - Array of scripts
+     */
+    public Object[] getScripts()
+    {
+        return this.scripts;
     }
     
     /**
@@ -49,9 +74,9 @@ public class Sprite
     
     /**
      *  lengthScripts - Get a list that contains the 
-     * lenght of each script.
+     * length of each script.
      * @return List<Integer> - A list of integer each integer represent
-     * the lenght of a script.
+     * the length of a script.
      */
     public List<Integer>  lengthScripts()
     {
@@ -63,5 +88,62 @@ public class Sprite
             scriptsLenght.add(aux.length());
         }
         return scriptsLenght;
-    }   
+    }
+    
+    
+    /**
+     *  getAllVaraibles - Get all data variables of
+     * the sprite.
+     * @return List<String> - A list of string each string represent
+     * a data variable of the sprite.
+     */
+    public List<String> getAllVaraibles()
+    {
+        return this.dataVaraibles;
+    }
+    
+    /**
+     *  getDataVariables - Get a list that contains the 
+     * data variables of each script.
+     * @return List<String> - A list of string each string represent
+     * a data variable of a script.
+     */
+    private List<String> getDataVariables(String word)
+    {
+        List<String> dataVaraibles = new ArrayList<String>();
+        Object[] scripts = this.scripts;
+        int wordpos = 0;
+        String variable = "";
+        for(int i = 0; i < scripts.length; i++)
+        {
+            String scriptsString = scripts[i].toString();
+            wordpos = scriptsString.indexOf(word,wordpos);
+            while(wordpos != -1)
+            {
+                
+                char[] aux = scriptsString.toCharArray();
+                while(aux[wordpos] != ',')
+                {
+                    wordpos = wordpos + 1; 
+                }
+                wordpos = wordpos + 1; 
+                while(aux[wordpos] != ',' && aux[wordpos] != ']')
+                {
+                    variable = variable + aux[wordpos];
+                    wordpos = wordpos + 1; 
+                }
+                dataVaraibles.add(variable);
+                variable = "";
+                wordpos = scriptsString.indexOf(word,wordpos + 1);
+            }
+            
+        }
+        
+        Set<String> auxSet = new HashSet<>();
+        auxSet.addAll(dataVaraibles);
+        dataVaraibles.clear();
+        dataVaraibles.addAll(auxSet);
+        
+        return dataVaraibles;
+    }
 }

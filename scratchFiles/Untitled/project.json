@@ -1,0 +1,187 @@
+{
+	"objName": "Stage",
+	"variables": [{
+			"name": "all example",
+			"value": 0,
+			"isPersistent": false
+		}],
+	"sounds": [{
+			"soundName": "pop",
+			"soundID": 1,
+			"md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+			"sampleCount": 258,
+			"rate": 11025,
+			"format": ""
+		}],
+	"costumes": [{
+			"costumeName": "backdrop1",
+			"baseLayerID": 7,
+			"baseLayerMD5": "739b5e2a2435f6e1ec2993791b423146.png",
+			"bitmapResolution": 1,
+			"rotationCenterX": 240,
+			"rotationCenterY": 180
+		}],
+	"currentCostumeIndex": 0,
+	"penLayerMD5": "5c81a336fab8be57adc039a8a2b33ca9.png",
+	"penLayerID": 0,
+	"tempoBPM": 60,
+	"videoAlpha": 0.5,
+	"children": [{
+			"objName": "Sprite1",
+			"variables": [{
+					"name": "Single example",
+					"value": 0,
+					"isPersistent": false
+				}],
+			"scripts": [[249,
+					90,
+					[["forward:", 10],
+						["turnRight:", 15],
+						["setVar:to:", "all example", 0],
+						["changeVar:by:", "all example", 1],
+						["setVar:to:", "all example", 0]]],
+				[487,
+					89,
+					[["say:duration:elapsed:from:", "Hello!", 2],
+						["showVariable:", "all example"],
+						["hideVariable:", "all example"],
+						["setVar:to:", "Single example", 0],
+						["showVariable:", "Single example"]]]],
+			"sounds": [{
+					"soundName": "meow",
+					"soundID": 0,
+					"md5": "83c36d806dc92327b9e7049a565c6bff.wav",
+					"sampleCount": 18688,
+					"rate": 22050,
+					"format": ""
+				}],
+			"costumes": [{
+					"costumeName": "costume1",
+					"baseLayerID": 1,
+					"baseLayerMD5": "09dc888b0b7df19f70d81588ae73420e.svg",
+					"bitmapResolution": 1,
+					"rotationCenterX": 47,
+					"rotationCenterY": 55
+				},
+				{
+					"costumeName": "costume2",
+					"baseLayerID": 2,
+					"baseLayerMD5": "3696356a03a8d938318876a593572843.svg",
+					"bitmapResolution": 1,
+					"rotationCenterX": 47,
+					"rotationCenterY": 55
+				}],
+			"currentCostumeIndex": 0,
+			"scratchX": 0,
+			"scratchY": 0,
+			"scale": 1,
+			"direction": 90,
+			"rotationStyle": "normal",
+			"isDraggable": false,
+			"indexInLibrary": 1,
+			"visible": true,
+			"spriteInfo": {
+			}
+		},
+		{
+			"target": "Stage",
+			"cmd": "getVar:",
+			"param": "all example",
+			"color": 15629590,
+			"label": "all example",
+			"mode": 1,
+			"sliderMin": 0,
+			"sliderMax": 100,
+			"isDiscrete": true,
+			"x": 5,
+			"y": 5,
+			"visible": true
+		},
+		{
+			"target": "Sprite1",
+			"cmd": "getVar:",
+			"param": "Single example",
+			"color": 15629590,
+			"label": "Sprite1: Single example",
+			"mode": 1,
+			"sliderMin": 0,
+			"sliderMax": 100,
+			"isDiscrete": true,
+			"x": 5,
+			"y": 32,
+			"visible": true
+		},
+		{
+			"objName": "Abby",
+			"scripts": [[312,
+					113,
+					[["forward:", 10],
+						["setVar:to:", "all example", 0],
+						["turnRight:", 15],
+						["changeVar:by:", "all example", 1],
+						["hideVariable:", "all example"]]],
+				[636,
+					109,
+					[["changeVar:by:", "all example", 1], ["changeVar:by:", "all example", 1], ["changeVar:by:", "all example", 1]]]],
+			"sounds": [{
+					"soundName": "pop",
+					"soundID": 1,
+					"md5": "83a9787d4cb6f3b7632b4ddfebf74367.wav",
+					"sampleCount": 258,
+					"rate": 11025,
+					"format": ""
+				}],
+			"costumes": [{
+					"costumeName": "abby-a",
+					"baseLayerID": 3,
+					"baseLayerMD5": "afab2d2141e9811bd89e385e9628cb5f.svg",
+					"bitmapResolution": 1,
+					"rotationCenterX": 31,
+					"rotationCenterY": 100
+				},
+				{
+					"costumeName": "abby-b",
+					"baseLayerID": 4,
+					"baseLayerMD5": "1e0116c7c2e5e80c679d0b33f1f5cfb7.svg",
+					"bitmapResolution": 1,
+					"rotationCenterX": 31,
+					"rotationCenterY": 100
+				},
+				{
+					"costumeName": "abby-c",
+					"baseLayerID": 5,
+					"baseLayerMD5": "b6e23922f23b49ddc6f62f675e77417c.svg",
+					"bitmapResolution": 1,
+					"rotationCenterX": 32,
+					"rotationCenterY": 100
+				},
+				{
+					"costumeName": "abby-d",
+					"baseLayerID": 6,
+					"baseLayerMD5": "2193cf08f74b8354f7c4fac37a06ea24.svg",
+					"bitmapResolution": 1,
+					"rotationCenterX": 31,
+					"rotationCenterY": 100
+				}],
+			"currentCostumeIndex": 0,
+			"scratchX": 72,
+			"scratchY": -32,
+			"scale": 1,
+			"direction": 105,
+			"rotationStyle": "normal",
+			"isDraggable": false,
+			"indexInLibrary": 2,
+			"visible": true,
+			"spriteInfo": {
+			}
+		}],
+	"info": {
+		"swfVersion": "v456",
+		"videoOn": false,
+		"scriptCount": 0,
+		"flashVersion": "LNX 25,0,0,127",
+		"spriteCount": 2,
+		"hasCloudData": false,
+		"userAgent": "Mozilla\/5.0 (X11; Ubuntu; Linux x86_64; rv:51.0) Gecko\/20100101 Firefox\/51.0"
+	}
+}

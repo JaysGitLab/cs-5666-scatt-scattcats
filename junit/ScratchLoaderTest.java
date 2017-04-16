@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import io.restassured.path.json.JsonPath;
+import java.util.ArrayList;
 import org.junit.After;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
@@ -183,10 +184,10 @@ public class ScratchLoaderTest
         deleteDirectory(dir);
     }
 
-	
+    
     /**
-    *	Helper method to make a temp directory with fake files.
-    *	@param dirName is the name of the directory to be made.
+    *   Helper method to make a temp directory with fake files.
+    *   @param dirName is the name of the directory to be made.
     **/
     public static void makeTempDirectory(String dirName)
     {
@@ -204,7 +205,7 @@ public class ScratchLoaderTest
             System.out.println(e);
         }
     }
-	
+    
     /**
     * Helper method to delete temp directories.
     * @param dir is a file directory.
@@ -302,8 +303,8 @@ public class ScratchLoaderTest
         Sprite sprite = new Sprite(name, spriteiScripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
         int length = 229;
-	int scriptLength =  scriptsLength.get(0);
-	assertEquals(length, scriptLength);
+    int scriptLength =  scriptsLength.get(0);
+    assertEquals(length, scriptLength);
     }
 
     /**
@@ -340,7 +341,7 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int count = project.getTotalScriptCount();
-	project = null;
+    project = null;
         assertEquals(4 , count);
     }
 
@@ -354,7 +355,7 @@ public class ScratchLoaderTest
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int len = project.getTotalScriptLenght();
-	project = null;
+    project = null;
         assertEquals(406 , len);
     }
 
@@ -362,26 +363,26 @@ public class ScratchLoaderTest
     /**
     * Fail test to check is media files are there.
     *
-    */	
+    */  
     @Test
     public void testMediaCheckFail()
     {
-	try
+    try
         {
-	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
+        String cmdArg = "scratchFiles/Paint with Gobo Fail";
             ScratchLoader loader = new ScratchLoader(cmdArg);
-	    assertFalse(loader.checkMediaReferences(cmdArg));
-	}
-	catch (Exception e)
-	{
+        assertFalse(loader.checkMediaReferences(cmdArg));
+    }
+    catch (Exception e)
+    {
             System.out.println(e);
-	}
+    }
     }
 
     /**
     * Test to unzip a file.
     *
-    */	
+    */  
     @Test
     public void testUnzip()
     {
@@ -403,11 +404,23 @@ public class ScratchLoaderTest
         cmdArg = "scratchFiles";
         loader = new ScratchLoader(cmdArg);
         loader.unzipFile();
-	file = new File("scratchFiles/Animate the Crab");
-	assertTrue(file.exists());
+    file = new File("scratchFiles/Animate the Crab");
+    assertTrue(file.exists());
     }
 
-
+    /**
+     * Test get Data Variables from one sprite
+     */
+    @Test
+    public void testgetDataVariables()
+    {
+        String cmdArg = "scratchFiles/Untitled";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        List<Sprite> sprites =  new ArrayList<Sprite>();
+        sprites = project.getListOfSprites();
+        List<String>  spriteOneVariables = sprites.get(0).getAllVaraibles();
+        assertEquals(2 , spriteOneVariables.size());
+    }
 
     /**
     *Clean up for the test.
@@ -415,7 +428,7 @@ public class ScratchLoaderTest
     @After
     public void cleanUp()
     {
-    	project = null;   
+        project = null;   
     }
 }
 

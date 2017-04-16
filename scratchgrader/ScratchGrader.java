@@ -105,4 +105,14 @@ public class ScratchGrader
         return count;
     }
     
+    /**
+     * getListOfSprites - Get the total list of \
+     * sprites.
+     * @return List<Sprite> - List of all sprites
+     */
+    public List<Sprite> getListOfSprites()
+    {
+        return this.sprites;
+    }
+    
 }

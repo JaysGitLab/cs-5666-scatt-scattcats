@@ -2,7 +2,7 @@ package scratchgrader;
 import java.io.File;
 import java.util.Scanner;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import scratchgrader.ScratchLoader;
 import scratchgrader.Sprite;
@@ -83,7 +83,7 @@ public class Demo
         // TODO: Have the user type in another directory again.
         List<Path> sb2Contents = loader.getFilePathsSB2(loader.getFileInputDir());
         loader.convertToZip(sb2Contents);
-	loader.unzipFile();
+    loader.unzipFile();
         List<Path> projects = loader.getDirectoryContents(loader.getFileInputDir());
         
         for (int i = 0; i < projects.size(); i++)
@@ -95,9 +95,18 @@ public class Demo
                 {
                    ScratchGrader grader = new ScratchGrader(file.getAbsolutePath());
                    System.out.println("Project: " + grader.getProjectName() + " | " + "Total Scripts: " + grader.getTotalScriptCount() + " | " + "Total length of the scripts: " + grader.getTotalScriptLenght());
+                   List<Sprite> sprites =  new ArrayList<Sprite>();
+                   sprites = grader.getListOfSprites();
+                   List<String>  spriteOneVariables = sprites.get(0).getAllVaraibles();
+    
                 }
             }
         }
         
     }
+   
 }
+
+
+
+
