@@ -4,16 +4,18 @@ import java.util.Scanner;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import scratchgrader.ScratchLoader;
-import scratchgrader.Sprite;
-import net.lingala.zip4j.core.ZipFile;
-import scratchgrader.ScratchGrader;
+
 
 
 
 
 public class Demo
 {
+
+    /**
+     * main - main for demo.
+     * @param args - main arg
+     */
     public static void main(String[] args)
     {
         // Create scratchloader object and take 
@@ -30,6 +32,10 @@ public class Demo
         
     }
     
+    /**
+     * makeMenu - Menu for demo
+     * 
+     */
     public int makeMenu()
     {
         System.out.println("===========================");
@@ -70,6 +76,10 @@ public class Demo
         return n;
     }   
     
+    /**
+     * gradeScratchDir - Grade a folder.
+     * 
+     */
     public void gradeScratchDir()
     {
         Scanner reader = new Scanner(System.in);
@@ -94,10 +104,11 @@ public class Demo
             {
                 if (loader.checkMediaReferences(file.getAbsolutePath()))
                 {
-                    ScratchGrader grader = new ScratchGrader
-                        (file.getAbsolutePath());
+                    ScratchGrader grader = new ScratchGrader(
+                            file.getAbsolutePath());
                     System.out.println("Project: " + grader.getProjectName() 
-                        + " | " + "Total Scripts: " + grader.getTotalScriptCount() 
+                        + " | " + "Total Scripts: " 
+                        + grader.getTotalScriptCount() 
                         + " | " + "Total length of the scripts: " 
                         + grader.getTotalScriptLenght());
                     List<Sprite> sprites =  new ArrayList<Sprite>();
