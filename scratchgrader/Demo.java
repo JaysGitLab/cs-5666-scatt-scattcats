@@ -6,9 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
-
+/**
+ * Demo.java
+ * Demo to run the app.
+ *  
+ * @author Chris Campell
+ * @author Eric Cambel
+ * @version 3/22/2017
+ */
 public class Demo
 {
 
@@ -33,8 +38,8 @@ public class Demo
     }
     
     /**
-     * makeMenu - Menu for demo
-     * 
+     * makeMenu - Menu for demo.
+     * @return int - user selection
      */
     public int makeMenu()
     {
