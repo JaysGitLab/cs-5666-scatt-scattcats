@@ -374,8 +374,7 @@ public class ScratchLoader
     */
     public static void unzipFile()
     {
-       
-	List<Path> files = getDirectoryContents(inputFileDirectory);       
+	    List<Path> files = getDirectoryContents(inputFileDirectory);       
         for (int i = 0; i < files.size(); i++)
         {
             String fileName = files.get(i)

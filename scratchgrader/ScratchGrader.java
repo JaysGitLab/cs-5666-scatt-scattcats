@@ -20,7 +20,7 @@ public class ScratchGrader
     
     private Path inputFileDirectory;
     private String projectName;
-    private List<Sprite> sprites = new ArrayList<Sprite>();
+    private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     /**
      * ScratchGrader - Constructor for objects of type ScratchGrader.
      * @param inputFileDirPath -The file path to the project folder 
@@ -104,5 +104,13 @@ public class ScratchGrader
         }
         return count;
     }
-    
+    /**
+     * getSpriteScripts -Returns the array of children.scripts read in from the
+     *  provided json file during instantiation.
+     */
+    public ArrayList<Sprite> getSpriteScripts()
+    {
+        return this.sprites; 
+    }
 }
+
