@@ -11,6 +11,7 @@ import static org.junit.Assert.assertFalse;
 import io.restassured.path.json.JsonPath;
 import java.util.ArrayList;
 import org.junit.After;
+import scratchgrader.DataVariable;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
 import scratchgrader.Sprite;
@@ -418,7 +419,7 @@ public class ScratchLoaderTest
         ScratchGrader project = new ScratchGrader(cmdArg);
         List<Sprite> sprites =  new ArrayList<Sprite>();
         sprites = project.getListOfSprites();
-        List<String>  spriteOneVariables = sprites.get(0).getAllVaraibles();
+        List<DataVariable>  spriteOneVariables = sprites.get(0).getAllVaraibles();
         assertEquals(2 , spriteOneVariables.size());
     }
 

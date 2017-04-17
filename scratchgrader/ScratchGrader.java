@@ -6,7 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 /**
  * ScratchGrader.java
  * Analize the scratch project and gives diferent metrics.
@@ -21,6 +23,7 @@ public class ScratchGrader
     private Path inputFileDirectory;
     private String projectName;
     private List<Sprite> sprites = new ArrayList<Sprite>();
+    private List<String> globalVariables;
     /**
      * ScratchGrader - Constructor for objects of type ScratchGrader.
      * @param inputFileDirPath -The file path to the project folder 
@@ -46,6 +49,8 @@ public class ScratchGrader
         File file = new File(inputFileDirectory.toString() + "/project.json");
         List<String> spriteName = JsonPath.
             from(file).get("children.objName");
+        globalVariables = JsonPath.
+            from(file).get("variables");
         List<List<String>>  spriteScripts = 
             JsonPath.from(file).get("children.scripts");
         spriteName.removeAll(Collections.singleton(null));
@@ -113,6 +118,62 @@ public class ScratchGrader
     public List<Sprite> getListOfSprites()
     {
         return this.sprites;
+    }
+    
+    /**
+     *  getAllSpritesVaraibles - Get all data variables of
+     * all the sprite.
+     * @return List<String> - A list of string each string represent
+     * a data variable.
+     */
+    public List<DataVariable> getAllSpritesVaraibles()
+    {
+        int count = 0;
+        int global = 0;
+        List<DataVariable> mockdataVaraibles = new ArrayList<DataVariable>();
+        List<DataVariable> dataVaraibles = new ArrayList<DataVariable>();
+        DataVariable data = null;
+        List<String> auxdataVaraibles = new ArrayList<String>();
+        Set<String> auxSet = new HashSet<>();
+        for (int i = 0; i < this.sprites.size(); i++)
+        {
+            dataVaraibles.addAll(sprites.get(i).getAllVaraibles());
+            
+        }
+        
+        for (int j = 0; j < dataVaraibles.size(); j++)
+        {
+            auxSet.add(dataVaraibles.get(j).getName());
+            
+        }
+        
+        auxdataVaraibles.addAll(auxSet);
+        
+        for (int i = 0; i < auxdataVaraibles.size(); i++)
+        {
+            data = new DataVariable(auxdataVaraibles.get(i),0,false);
+            mockdataVaraibles.add(data);
+        }
+        
+        for (int i = 0; i < mockdataVaraibles.size(); i++)
+        {
+            for (int j = 0; j < dataVaraibles.size(); j++)
+            {
+               if (mockdataVaraibles.get(i).getName().compareTo(dataVaraibles.get(j).getName()) == 0)
+               {
+                   global = global + 1;
+                   data = mockdataVaraibles.get(i);
+                   data.setUses(data.getUses() + dataVaraibles.get(j).getUses());
+                   if (global > 1)
+                   data.setGlobal(true);
+                   mockdataVaraibles.set(i, data);
+                   
+               }
+            }
+            global = 0;
+        }
+        
+        return mockdataVaraibles;
     }
     
 }

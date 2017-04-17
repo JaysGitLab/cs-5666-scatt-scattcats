@@ -17,7 +17,7 @@ public class Sprite
 
     private String name;
     private Object[] scripts;
-    private List<String>  dataVaraibles = new ArrayList<String>();
+    private List<DataVariable>  dataVaraibles = new ArrayList<DataVariable>();
     
     /**
      * Sprite - Constructor for objects of type Sprite.
@@ -28,17 +28,41 @@ public class Sprite
     {
         this.name = name;
         this.scripts = scripts;
+        List<String> auxtocount = new ArrayList<String>();
+        List<String> auxDataVaraible = new ArrayList<String>();
         List<String> changevar = getDataVariables("changeVar");
         List<String> hidevar = getDataVariables("hideVariable");
         List<String> showvar = getDataVariables("showVariable");
         List<String> setvar = getDataVariables("setVar");
         
         Set<String> auxSet = new HashSet<>();
-        auxSet.addAll(changevar);
+        auxSet.addAll(changevar); 
         auxSet.addAll(hidevar);
         auxSet.addAll(showvar);
         auxSet.addAll(setvar);
-        dataVaraibles.addAll(auxSet);
+        auxDataVaraible.addAll(auxSet);
+        
+        
+        auxtocount.addAll(changevar); 
+        auxtocount.addAll(hidevar);
+        auxtocount.addAll(showvar);
+        auxtocount.addAll(setvar);
+        
+        int counter = 0;
+        for(int j = 0; j < auxDataVaraible.size(); j++)
+        {
+            for(int i = 0; i < auxtocount.size(); i++)
+            {
+              if (auxDataVaraible.get(j).compareTo(auxtocount.get(i)) == 0)
+              {
+               counter = counter + 1;
+               auxtocount.remove(i);
+              }
+            }
+           DataVariable data = new DataVariable(auxDataVaraible.get(j),counter,false);
+           dataVaraibles.add(data);
+           counter = 0;
+        }
          
     }
 
@@ -97,7 +121,7 @@ public class Sprite
      * @return List<String> - A list of string each string represent
      * a data variable of the sprite.
      */
-    public List<String> getAllVaraibles()
+    public List<DataVariable> getAllVaraibles()
     {
         return this.dataVaraibles;
     }
@@ -139,10 +163,7 @@ public class Sprite
             
         }
         
-        Set<String> auxSet = new HashSet<>();
-        auxSet.addAll(dataVaraibles);
-        dataVaraibles.clear();
-        dataVaraibles.addAll(auxSet);
+       
         
         return dataVaraibles;
     }

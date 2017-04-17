@@ -109,18 +109,23 @@ public class Demo
             {
                 if (loader.checkMediaReferences(file.getAbsolutePath()))
                 {
+                    
                     ScratchGrader grader = new ScratchGrader(
                             file.getAbsolutePath());
+                    List<Sprite> sprites =  new ArrayList<Sprite>();
+                    sprites = grader.getListOfSprites();
+                    List<DataVariable> data = grader.getAllSpritesVaraibles(); 
                     System.out.println("Project: " + grader.getProjectName() 
                         + " | " + "Total Scripts: " 
                         + grader.getTotalScriptCount() 
                         + " | " + "Total length of the scripts: " 
-                        + grader.getTotalScriptLenght());
-                    List<Sprite> sprites =  new ArrayList<Sprite>();
-                    sprites = grader.getListOfSprites();
-                    List<String>  spriteOneVariables = 
-                        sprites.get(0).getAllVaraibles();
-    
+                        + grader.getTotalScriptLenght()
+                        + " | " + "Total Data Varaibles: " 
+                        + data.size());
+                    for (int j = 0; j < data.size(); j++)
+                    {
+                        System.out.println("Variables: " + data.get(j).getName()  + " | " + "Uses: " + data.get(j).getUses() +  " | " + "Global: " + data.get(j).getGlobal().toString());
+                    }  
                 }
             }
         }
