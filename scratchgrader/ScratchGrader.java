@@ -107,10 +107,13 @@ public class ScratchGrader
     /**
      * getSpriteScripts -Returns the array of children.scripts read in from the
      *  provided json file during instantiation.
+     * @return spriteScripts -An arraylist of sprites retrieved from the 
+     *  project.json's child.scripts. 
      */
     public ArrayList<Sprite> getSpriteScripts()
     {
-        return this.sprites; 
+        ArrayList<Sprite> spriteScripts = this.sprites;
+        return spriteScripts; 
     }
 }
 
