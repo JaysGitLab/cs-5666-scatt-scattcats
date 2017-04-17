@@ -94,7 +94,7 @@ public class Demo
                 if(loader.checkMediaReferences(file.getAbsolutePath()))
                 {
                    ScratchGrader grader = new ScratchGrader(file.getAbsolutePath());
-                   System.out.println("Project: " + grader.getProjectName() + " | " + "Total Scripts: " + grader.getTotalScriptCount() + " | " + "Total length of the scripts: " + grader.getTotalScriptLenght());
+                   System.out.println("Project: " + grader.getProjectName() + " | " + "Total Scripts: " + grader.getTotalScriptCount() + " | " + "Combined length of the scripts: " + grader.getCombinedScriptLength());
                 }
             }
         }

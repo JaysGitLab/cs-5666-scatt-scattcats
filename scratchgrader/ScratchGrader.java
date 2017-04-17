@@ -87,11 +87,11 @@ public class ScratchGrader
     }
 
     /**
-     * getTotalScriptLenght - Get the total lenght between \
-     * all the scripts the of the project.
-     * @return int - total lenght of all scripts
+     * getCombinedScriptLength - Get the combined length of \
+     * all the scripts in the project.
+     * @return int -The total length of all scripts (by number of children).
      */
-    public int getTotalScriptLenght()
+    public int getCombinedScriptLength()
     {
         int count = 0;
         for (int i = 0; i < this.sprites.size(); i++)
