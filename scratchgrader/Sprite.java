@@ -10,6 +10,7 @@ import java.util.Set;
  * inside the scratch project. 
  * @author Chris Campell
  * @author Eric Cambel
+ * @author EriK Lares    
  * @version 3/22/2017
  */
 public class Sprite 
@@ -134,31 +135,36 @@ public class Sprite
      */
     private List<String> getDataVariables(String word)
     {
-        List<String> dataVaraibles = new ArrayList<String>();
+        List<String> dataVaraibles = 
+            new ArrayList<String>();
         Object[] scripts = this.scripts;
         int wordpos = 0;
         String variable = "";
-        for(int i = 0; i < scripts.length; i++)
+        for (int i = 0; i < scripts.length; i++)
         {
-            String scriptsString = scripts[i].toString();
-            wordpos = scriptsString.indexOf(word,wordpos);
-            while(wordpos != -1)
+            String scriptsString = 
+                scripts[i].toString();
+            wordpos = scriptsString.indexOf
+                (word,wordpos);
+            while (wordpos != -1)
             {
                 
-                char[] aux = scriptsString.toCharArray();
-                while(aux[wordpos] != ',')
+                char[] aux = scriptsString.
+                    toCharArray();
+                while (aux[wordpos] != ',')
                 {
                     wordpos = wordpos + 1; 
                 }
                 wordpos = wordpos + 1; 
-                while(aux[wordpos] != ',' && aux[wordpos] != ']')
+                while (aux[wordpos] != ',' && aux[wordpos] != ']')
                 {
                     variable = variable + aux[wordpos];
                     wordpos = wordpos + 1; 
                 }
                 dataVaraibles.add(variable);
                 variable = "";
-                wordpos = scriptsString.indexOf(word,wordpos + 1);
+                wordpos = scriptsString.
+                    indexOf(word,wordpos + 1);
             }
             
         }

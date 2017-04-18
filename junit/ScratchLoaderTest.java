@@ -424,6 +424,121 @@ public class ScratchLoaderTest
     }
 
     /**
+     * Test DataVariables constructor.
+     */
+    @Test
+    public void testDataVariableConstructor()
+    {
+        String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        assertEquals(test.getClass() , DataVariable.class);
+    }
+
+    /**
+     * Test DataVariables getName.
+     */
+    @Test
+    public void testGetName()
+    {
+    	String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        assertEquals(name, test.getName());
+    }
+
+    /**
+     * Test DataVariables getUses.
+     */
+    @Test
+    public void testGetUses()
+    {
+    	String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        assertEquals(uses, test.getUses());
+    }
+
+    /**
+     * Test DataVariables getGlobal.
+     */
+    @Test
+    public void testGetGlobal()
+    {
+    	String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        assertEquals(global, test.getGlobal());
+    }
+
+    /**
+     * Test DataVariables setName.
+     */
+    @Test
+    public void testSetName()
+    {
+    	String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        test.setName("SetTest");
+        assertEquals("SetTest", test.getName());
+    }
+
+    /**
+     * Test DataVariables setUses.
+     */
+    @Test
+    public void testSetUses()
+    {
+    	String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        test.setUses(5);
+        assertEquals(5, test.getUses());
+    }
+
+    /**
+     * Test DataVariables SetGlobal.
+     */
+    @Test
+    public void testSetGlobal()
+    {
+    	String name = "testVaraible";
+        int uses = 10;
+        Boolean global = false;
+        DataVariable test = new 
+        	DataVariable(name,uses,global);
+        test.setGlobal(true);
+        assertEquals(true, test.getGlobal());
+    }
+
+    /**
+     * Test get Data Variables from all sprites.
+     */
+    @Test
+    public void testGetAllSpritesVaraibles()
+    {
+        String cmdArg = "scratchFiles/Untitled";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        List<DataVariable>  variables = 
+        	project.getAllSpritesVaraibles();
+        assertEquals(2, variables.size());
+    }
+
+
+    /**
     *Clean up for the test.
     */
     @After

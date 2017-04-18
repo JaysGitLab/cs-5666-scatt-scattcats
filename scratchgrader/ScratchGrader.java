@@ -130,20 +130,25 @@ public class ScratchGrader
     {
         int count = 0;
         int global = 0;
-        List<DataVariable> mockdataVaraibles = new ArrayList<DataVariable>();
-        List<DataVariable> dataVaraibles = new ArrayList<DataVariable>();
+        List<DataVariable> mockdataVaraibles = 
+            new ArrayList<DataVariable>();
+        List<DataVariable> dataVaraibles = 
+            new ArrayList<DataVariable>();
         DataVariable data = null;
-        List<String> auxdataVaraibles = new ArrayList<String>();
+        List<String> auxdataVaraibles = 
+            new ArrayList<String>();
         Set<String> auxSet = new HashSet<>();
         for (int i = 0; i < this.sprites.size(); i++)
         {
-            dataVaraibles.addAll(sprites.get(i).getAllVaraibles());
+            dataVaraibles.addAll
+                (sprites.get(i).getAllVaraibles());
             
         }
         
         for (int j = 0; j < dataVaraibles.size(); j++)
         {
-            auxSet.add(dataVaraibles.get(j).getName());
+            auxSet.add
+                (dataVaraibles.get(j).getName());
             
         }
         
@@ -151,7 +156,8 @@ public class ScratchGrader
         
         for (int i = 0; i < auxdataVaraibles.size(); i++)
         {
-            data = new DataVariable(auxdataVaraibles.get(i),0,false);
+            data = new DataVariable
+                (auxdataVaraibles.get(i),0,false);
             mockdataVaraibles.add(data);
         }
         
@@ -163,7 +169,8 @@ public class ScratchGrader
                {
                    global = global + 1;
                    data = mockdataVaraibles.get(i);
-                   data.setUses(data.getUses() + dataVaraibles.get(j).getUses());
+                   data.setUses(data.getUses() + 
+                        dataVaraibles.get(j).getUses());
                    if (global > 1)
                    data.setGlobal(true);
                    mockdataVaraibles.set(i, data);
