@@ -125,11 +125,12 @@ public class Demo
                     for (int j = 0; j < data.size(); j++)
                     {
                         System.out.println(
-                            "Variables: " + data.get(j).getName()  
-                            + " | " + "Uses: " +
-                            data.get(j).getUses() 
-                            + " | " + "Global: " + 
-                            data.get(j).getGlobal().toString());
+                            "Variables: " + data.get(j).getName()  + " | "
+                            + "Uses: " 
+                            + data.get(j).getUses() 
+                            + " | " 
+                            + "Global: " 
+                            + data.get(j).getGlobal().toString());
                     }  
                 }
             }

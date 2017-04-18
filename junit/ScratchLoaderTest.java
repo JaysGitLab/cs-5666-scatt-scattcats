@@ -434,7 +434,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         assertEquals(test.getClass() , DataVariable.class);
     }
 
@@ -448,7 +448,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         assertEquals(name, test.getName());
     }
 
@@ -462,7 +462,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         assertEquals(uses, test.getUses());
     }
 
@@ -476,7 +476,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         assertEquals(global, test.getGlobal());
     }
 
@@ -490,7 +490,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         test.setName("SetTest");
         assertEquals("SetTest", test.getName());
     }
@@ -505,7 +505,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         test.setUses(5);
         assertEquals(5, test.getUses());
     }
@@ -520,7 +520,7 @@ public class ScratchLoaderTest
         int uses = 10;
         Boolean global = false;
         DataVariable test = new 
-        	DataVariable(name,uses, global);
+        	DataVariable(name, uses, global);
         test.setGlobal(true);
         assertEquals(true, test.getGlobal());
     }
