@@ -47,11 +47,11 @@ public class CategoryMap{
         File file = new File("MapFolder/" + category);
         ScratchGrader grader = new ScratchGrader(file.getAbsolutePath());
         List<Sprite> sprites =  grader.getListOfSprites();
-        Object [] scripts = sprites.get(0).getScripts();
+        List<Script> scripts = sprites.get(0).getScripts();
     
-        for (int i = 0; i < scripts.length; i++)
+        for (int i = 0; i < scripts.size(); i++)
         {
-            blocks.add(scripts[i].toString());
+            blocks.add(scripts.get(i).getScriptContent().toString());
         }    
         return blocks;
     }

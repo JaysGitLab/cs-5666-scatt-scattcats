@@ -24,12 +24,10 @@
 	"children": [{
 			"objName": "Sprite1",
 			"scripts": [
-					"say:duration:elapsed:from",
-						"say",
-						"think:duration:elapsed:from",
-						"think",
-						"show",
-						"hide",
+						"say:",
+						"think:",
+						["show"],
+						["hide"],
 						"lookLike",
 						"nextCostume",
 						"startScene",

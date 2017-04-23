@@ -10,61 +10,25 @@ import java.util.Set;
  * inside the scratch project. 
  * @author Chris Campell
  * @author Eric Cambel
- * @author EriK Lares    
  * @version 3/22/2017
  */
 public class Sprite 
 {
 
     private String name;
-    private Object[] scripts;
-    private List<DataVariable>  dataVaraibles = new ArrayList<DataVariable>();
+    private List<Script> scripts;
+    
     
     /**
      * Sprite - Constructor for objects of type Sprite.
      * @param name - Name of the sprite object
      * @param scripts - List of scripts.
      */
-    public Sprite(String name, Object[] scripts) 
+    public Sprite(String name, List<Script> scripts) 
     {
         this.name = name;
         this.scripts = scripts;
-        List<String> auxtocount = new ArrayList<String>();
-        List<String> auxDataVaraible = new ArrayList<String>();
-        List<String> changevar = getDataVariables("changeVar");
-        List<String> hidevar = getDataVariables("hideVariable");
-        List<String> showvar = getDataVariables("showVariable");
-        List<String> setvar = getDataVariables("setVar");
-        
-        Set<String> auxSet = new HashSet<>();
-        auxSet.addAll(changevar); 
-        auxSet.addAll(hidevar);
-        auxSet.addAll(showvar);
-        auxSet.addAll(setvar);
-        auxDataVaraible.addAll(auxSet);
-        
-        
-        auxtocount.addAll(changevar); 
-        auxtocount.addAll(hidevar);
-        auxtocount.addAll(showvar);
-        auxtocount.addAll(setvar);
-        
-        int counter = 0;
-        for(int j = 0; j < auxDataVaraible.size(); j++)
-        {
-            for(int i = 0; i < auxtocount.size(); i++)
-            {
-              if (auxDataVaraible.get(j).compareTo(auxtocount.get(i)) == 0)
-              {
-               counter = counter + 1;
-               auxtocount.remove(i);
-              }
-            }
-           DataVariable data = new DataVariable(auxDataVaraible.get(j),counter,false);
-           dataVaraibles.add(data);
-           counter = 0;
-        }
-         
+                  
     }
 
     /**
@@ -82,7 +46,7 @@ public class Sprite
      *
      * @return Object[] - Array of scripts
      */
-    public Object[] getScripts()
+    public List<Script> getScripts()
     {
         return this.scripts;
     }
@@ -94,7 +58,7 @@ public class Sprite
      */
     public int countScripts()
     {
-        return this.scripts.length;
+        return this.scripts.size();
     }
     
     /**
@@ -103,74 +67,109 @@ public class Sprite
      * @return List<Integer> - A list of integer each integer represent
      * the length of a script.
      */
+    
     public List<Integer>  lengthScripts()
     {
         List<Integer> scriptsLenght = new ArrayList<Integer>();
         
-        for (int i = 0; i < this.scripts.length; i++)
+        for (int i = 0; i < this.scripts.size(); i++)
         {
-            String aux = this.scripts[i].toString();
-            scriptsLenght.add(aux.length());
+            String aux = this.scripts.get(i).getScriptContent().toString();
+            
+            String[] lines = aux.split("\r\n|\r|\n");
+            scriptsLenght.add(lines.length);
         }
         return scriptsLenght;
     }
     
-    
+      
     /**
-     *  getAllVaraibles - Get all data variables of
-     * the sprite.
+     *  getAllSpritesVaraibles - Get all data variables of
+     * all the sprite.
      * @return List<String> - A list of string each string represent
-     * a data variable of the sprite.
+     * a data variable.
      */
-    public List<DataVariable> getAllVaraibles()
-    {
-        return this.dataVaraibles;
-    }
     
-    /**
-     *  getDataVariables - Get a list that contains the 
-     * data variables of each script.
-     * @return List<String> - A list of string each string represent
-     * a data variable of a script.
-     */
-    private List<String> getDataVariables(String word)
+    public List<DataVariable> getAllScriptVaraibles()
     {
-        List<String> dataVaraibles = 
-            new ArrayList<String>();
-        Object[] scripts = this.scripts;
-        int wordpos = 0;
-        String variable = "";
-        for (int i = 0; i < scripts.length; i++)
+        int count = 0;
+        int global = 0;
+        List<DataVariable> mockdataVaraibles = new ArrayList<DataVariable>();
+        List<DataVariable> dataVaraibles = new ArrayList<DataVariable>();
+        DataVariable data = null;
+        List<String> auxdataVaraibles = new ArrayList<String>();
+        Set<String> auxSet = new HashSet<>();
+        for (int i = 0; i < this.scripts.size(); i++)
         {
-            String scriptsString = 
-                scripts[i].toString();
-            wordpos = scriptsString.indexOf
-                (word,wordpos);
-            while (wordpos != -1)
-            {
-                
-                char[] aux = scriptsString.
-                    toCharArray();
-                while (aux[wordpos] != ',')
-                {
-                    wordpos = wordpos + 1; 
-                }
-                wordpos = wordpos + 1; 
-                while (aux[wordpos] != ',' && aux[wordpos] != ']')
-                {
-                    variable = variable + aux[wordpos];
-                    wordpos = wordpos + 1; 
-                }
-                dataVaraibles.add(variable);
-                variable = "";
-                wordpos = scriptsString.
-                    indexOf(word,wordpos + 1);
-            }
+            dataVaraibles.addAll(scripts.get(i).getDataVaraibles());
             
         }
         
-       
+        for (int j = 0; j < dataVaraibles.size(); j++)
+        {
+            auxSet.add(dataVaraibles.get(j).getName());
+            
+        }
         
-        return dataVaraibles;
+        auxdataVaraibles.addAll(auxSet);
+        
+        for (int i = 0; i < auxdataVaraibles.size(); i++)
+        {
+            data = new DataVariable(auxdataVaraibles.get(i),0,false);
+            mockdataVaraibles.add(data);
+        }
+        
+        for (int i = 0; i < mockdataVaraibles.size(); i++)
+        {
+            for (int j = 0; j < dataVaraibles.size(); j++)
+            {
+               if (mockdataVaraibles.get(i).getName().compareTo(dataVaraibles.get(j).getName()) == 0)
+               {
+                   global = global + 1;
+                   data = mockdataVaraibles.get(i);
+                   data.setUses(data.getUses() + dataVaraibles.get(j).getUses());
+                   if (global > 1)
+                   data.setGlobal(true);
+                   mockdataVaraibles.set(i, data);
+                   
+               }
+            }
+            global = 0;
+        }
+        
+        return mockdataVaraibles;
+    }
+    
+    public List<String> getAllScriptcategorys()
+    {
+        List<String> categoryBlocks = new ArrayList<String>();
+        List<String> auxcategoryBlocks = new ArrayList<String>();
+      
+        categoryBlocks.add("Control, " + 0);         
+        categoryBlocks.add("Event, " + 0);           
+        categoryBlocks.add("Looks, " + 0);           
+        categoryBlocks.add("Motion, " + 0);          
+        categoryBlocks.add("Operator, " + 0);           
+        categoryBlocks.add("Pen, " + 0);           
+        categoryBlocks.add("Sensing, " + 0);  
+        categoryBlocks.add("Sound, " + 0);
+        
+        for (int i = 0; i < this.scripts.size(); i++)
+        {
+            auxcategoryBlocks = scripts.get(i).getCategoryBlocks();
+            
+            for (int j = 0; j < auxcategoryBlocks.size(); j++)
+            {
+                String auxTogether[] = auxcategoryBlocks.get(j).split(",");
+                int auxCount = Integer.valueOf(auxTogether[1].trim());
+                String together[] = categoryBlocks.get(j).split(",");
+                int Count = Integer.valueOf(together[1].trim());
+                categoryBlocks.set(j, together[0] + ", "+ (auxCount + Count));
+                
+            }
+        }
+        
+        
+        return categoryBlocks;
     }
 }

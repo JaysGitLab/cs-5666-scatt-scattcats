@@ -42,7 +42,7 @@ default:
 	@echo "usage: make target"
 	@echo "available targets: compile, test, clean"
 
-compile: scratchgrader/Demo.class scratchgrader/CategoryMap.class scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/DataVariable.class junit/ScratchLoaderTest.class 
+compile: scratchgrader/Demo.class scratchgrader/CategoryMap.class scratchgrader/Script.class scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/DataVariable.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
 junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
@@ -65,6 +65,7 @@ clean:
 	rm -f junit/ScratchLoaderTest.class
 	rm -f scratchgrader/DataVariable.class
 	rm -f scratchgrader/CategoryMap.class
+	rm -f scratchgrader/Script.class
 
 test: scratchgrader/ScratchLoader.class junit/ScratchLoaderTest.class $(JUNIT_LOCAL) $(HAMCREST_LOCAL)
 	java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL) org.junit.runner.JUnitCore junit.ScratchLoaderTest

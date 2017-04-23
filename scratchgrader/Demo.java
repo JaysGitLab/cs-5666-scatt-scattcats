@@ -88,7 +88,7 @@ public class Demo
     public void gradeScratchDir()
     {
         Scanner reader = new Scanner(System.in);
-       
+        CategoryMap map = CategoryMap.getInstance();
         System.out.print("Please enter the name of the" 
             + " directory with the scratch files: ");  
         String dir = reader.nextLine();
@@ -125,11 +125,19 @@ public class Demo
                     for (int j = 0; j < data.size(); j++)
                     {
                         System.out.println("Variables: " + data.get(j).getName()  + " | " + "Uses: " + data.get(j).getUses() +  " | " + "Global: " + data.get(j).getGlobal().toString());
-                    }  
+                    }
+                    
+                    List<String>  categoryBlocks = grader.getAllSprintcategorys();
+                    
+                    for (int j = 0; j < categoryBlocks.size(); j++)
+                    {
+                        System.out.println("Category & Uses: " + categoryBlocks.get(j));
+                    }
                 }
+                 System.out.println("");
             }
         }
-        
+              
     }
    
 }

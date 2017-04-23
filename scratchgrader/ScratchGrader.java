@@ -60,7 +60,13 @@ public class ScratchGrader
             String name = spriteName.get(i);
             List<String>  aux =  spriteScripts.get(i);
             Object[]  spriteiScripts = aux.toArray(); 
-            Sprite sprite = new Sprite(name, spriteiScripts);
+            List <Script> scripts = new ArrayList<Script>();
+            for (int j = 0; j < spriteiScripts.length; j++)
+            {
+                Script script = new Script(spriteiScripts[j]);
+                scripts.add(script);
+            }
+            Sprite sprite = new Sprite(name, scripts);
             this.sprites.add(sprite);
         }
         
@@ -99,6 +105,7 @@ public class ScratchGrader
     public int getTotalScriptLenght()
     {
         int count = 0;
+        
         for (int i = 0; i < this.sprites.size(); i++)
         {
             List<Integer> aux = this.sprites.get(i).lengthScripts();
@@ -126,29 +133,25 @@ public class ScratchGrader
      * @return List<String> - A list of string each string represent
      * a data variable.
      */
+    
     public List<DataVariable> getAllSpritesVaraibles()
     {
         int count = 0;
         int global = 0;
-        List<DataVariable> mockdataVaraibles = 
-            new ArrayList<DataVariable>();
-        List<DataVariable> dataVaraibles = 
-            new ArrayList<DataVariable>();
+        List<DataVariable> mockdataVaraibles = new ArrayList<DataVariable>();
+        List<DataVariable> dataVaraibles = new ArrayList<DataVariable>();
         DataVariable data = null;
-        List<String> auxdataVaraibles = 
-            new ArrayList<String>();
+        List<String> auxdataVaraibles = new ArrayList<String>();
         Set<String> auxSet = new HashSet<>();
         for (int i = 0; i < this.sprites.size(); i++)
         {
-            dataVaraibles.addAll
-                (sprites.get(i).getAllVaraibles());
+            dataVaraibles.addAll(sprites.get(i).getAllScriptVaraibles());
             
         }
         
         for (int j = 0; j < dataVaraibles.size(); j++)
         {
-            auxSet.add
-                (dataVaraibles.get(j).getName());
+            auxSet.add(dataVaraibles.get(j).getName());
             
         }
         
@@ -156,8 +159,7 @@ public class ScratchGrader
         
         for (int i = 0; i < auxdataVaraibles.size(); i++)
         {
-            data = new DataVariable
-                (auxdataVaraibles.get(i),0,false);
+            data = new DataVariable(auxdataVaraibles.get(i),0,false);
             mockdataVaraibles.add(data);
         }
         
@@ -169,8 +171,7 @@ public class ScratchGrader
                {
                    global = global + 1;
                    data = mockdataVaraibles.get(i);
-                   data.setUses(data.getUses() + 
-                        dataVaraibles.get(j).getUses());
+                   data.setUses(data.getUses() + dataVaraibles.get(j).getUses());
                    if (global > 1)
                    data.setGlobal(true);
                    mockdataVaraibles.set(i, data);
@@ -181,6 +182,41 @@ public class ScratchGrader
         }
         
         return mockdataVaraibles;
+    }
+    
+    public List<String> getAllSprintcategorys()
+    {
+        List<String> categoryBlocks = new ArrayList<String>();
+        List<String> auxcategoryBlocks = new ArrayList<String>();
+      
+        categoryBlocks.add("Control, " + 0);         
+        categoryBlocks.add("Event, " + 0);           
+        categoryBlocks.add("Looks, " + 0);           
+        categoryBlocks.add("Motion, " + 0);          
+        categoryBlocks.add("Operator, " + 0);           
+        categoryBlocks.add("Pen, " + 0);           
+        categoryBlocks.add("Sensing, " + 0);  
+        categoryBlocks.add("Sound, " + 0);
+        
+        for (int i = 0; i < this.sprites.size(); i++)
+        {
+            
+            
+            auxcategoryBlocks = sprites.get(i).getAllScriptcategorys();
+            
+            for (int j = 0; j < auxcategoryBlocks.size(); j++)
+            {
+                String auxTogether[] = auxcategoryBlocks.get(j).split(",");
+                int auxCount = Integer.valueOf(auxTogether[1].trim());
+                String together[] = categoryBlocks.get(j).split(",");
+                int Count = Integer.valueOf(together[1].trim());
+                categoryBlocks.set(j, together[0] + ", "+ (auxCount + Count));
+                
+            }
+        }
+        
+        
+        return categoryBlocks;
     }
     
 }
