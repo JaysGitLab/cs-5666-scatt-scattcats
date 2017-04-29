@@ -49,9 +49,9 @@
 					244,
 					[["whenGreenFlag"], ["lookLike:", "starter crab"], ["doForever", [["nextCostume"], ["wait:elapsed:from:", 1]]]]],
 				[38, 401, [["whenGreenFlag"], ["doForever", [["doPlaySoundAndWait", "human beatbox1"]]]]]],
-			"scriptComments": [[240, 257, 137, 65, true, 8, "Switch between costumes"],
-				[300, 414, 133, 54, true, 13, "Play music"],
-				[274, 118.5, 158, 71, true, 3, "Move around randomly"]],
+			"scriptComments": [[235, 257, 137, 65, true, 8, "Switch between costumes"],
+				[304, 414, 133, 54, true, 13, "Play music"],
+				[329, 118.5, 158, 71, true, 3, "Move around randomly"]],
 			"sounds": [{
 					"soundName": "human beatbox1",
 					"soundID": 0,
@@ -129,13 +129,13 @@
 			}
 		}],
 	"info": {
-		"spriteCount": 1,
-		"swfVersion": "v454",
-		"userAgent": "Mozilla\/5.0 (Windows NT 10.0; WOW64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/56.0.2924.87 Safari\/537.36",
-		"flashVersion": "WIN 25,0,0,127",
 		"projectID": "10015059",
 		"hasCloudData": false,
-		"videoOn": false,
-		"scriptCount": 3
+		"scriptCount": 3,
+		"userAgent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/56.0.2924.87 Safari\/537.36",
+		"swfVersion": "v454",
+		"spriteCount": 1,
+		"flashVersion": "WIN 25,0,0,127",
+		"videoOn": false
 	}
 }

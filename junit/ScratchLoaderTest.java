@@ -9,11 +9,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import io.restassured.path.json.JsonPath;
+import java.util.ArrayList;
 import org.junit.After;
+import scratchgrader.DataVariable;
 //import static org.junit.Assert.assertNotSame;
 import scratchgrader.ScratchLoader;
 import scratchgrader.Sprite;
 import scratchgrader.ScratchGrader;
+import scratchgrader.Script;
 /**
  * ScratchLoaderTest.java
  * Tests the functionality of loading and reading scratch files.
@@ -183,10 +186,10 @@ public class ScratchLoaderTest
         deleteDirectory(dir);
     }
 
-	
+    
     /**
-    *	Helper method to make a temp directory with fake files.
-    *	@param dirName is the name of the directory to be made.
+    *   Helper method to make a temp directory with fake files.
+    *   @param dirName is the name of the directory to be made.
     **/
     public static void makeTempDirectory(String dirName)
     {
@@ -204,7 +207,7 @@ public class ScratchLoaderTest
             System.out.println(e);
         }
     }
-	
+    
     /**
     * Helper method to delete temp directories.
     * @param dir is a file directory.
@@ -242,7 +245,13 @@ public class ScratchLoaderTest
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
-        Sprite sprite = new Sprite(name, spriteiScripts);
+        List <Script> scripts = new ArrayList<Script>();
+        for (int j = 0; j < spriteiScripts.length; j++)
+        {
+            Script script = new Script(spriteiScripts[j]);
+            scripts.add(script);
+        }
+        Sprite sprite = new Sprite(name, scripts);
         assertEquals(sprite.getClass() , Sprite.class);
     }
 
@@ -261,7 +270,13 @@ public class ScratchLoaderTest
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
-        Sprite sprite = new Sprite(name, spriteiScripts);
+        List <Script> scripts = new ArrayList<Script>();
+        for (int j = 0; j < spriteiScripts.length; j++)
+        {
+            Script script = new Script(spriteiScripts[j]);
+            scripts.add(script);
+        }
+        Sprite sprite = new Sprite(name, scripts);
         assertEquals("Choose", sprite.getSpriteName());
     }
 
@@ -280,7 +295,13 @@ public class ScratchLoaderTest
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
-        Sprite sprite = new Sprite(name, spriteiScripts);
+        List <Script> scripts = new ArrayList<Script>();
+        for (int j = 0; j < spriteiScripts.length; j++)
+        {
+            Script script = new Script(spriteiScripts[j]);
+            scripts.add(script);
+        }
+        Sprite sprite = new Sprite(name, scripts);
         assertEquals(2, sprite.countScripts());
     }
 
@@ -288,6 +309,7 @@ public class ScratchLoaderTest
     * Test to get the length of the scripts inside the sprite.
     *
     */
+    
     @Test
     public void testGetCombinedScriptLength()
     {
@@ -299,11 +321,18 @@ public class ScratchLoaderTest
         String name = spriteName.get(0);
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
-        Sprite sprite = new Sprite(name, spriteiScripts);
+        List <Script> scripts = new ArrayList<Script>();
+        for (int j = 0; j < spriteiScripts.length; j++)
+        {
+            Script script = new Script(spriteiScripts[j]);
+            scripts.add(script);
+        }
+        Sprite sprite = new Sprite(name, scripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
-        int length = 229;
-	    int scriptLength =  scriptsLength.get(0);
-	    assertEquals(length, scriptLength);
+        int length = 1;
+        int scriptLength =  scriptsLength.get(0);
+        assertEquals(length, scriptLength);
+
     }
 
     /**
@@ -334,16 +363,17 @@ public class ScratchLoaderTest
     * Test to count scripts inside the scratch project.
     *
     */
+
     @Test
     public void testgetTotalScriptCount()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
         int count = project.getTotalScriptCount();
-	project = null;
+        project = null;
         assertEquals(4 , count);
     }
-
+	
      /**
     * Test to get the length of the scripts inside the scratch project.
     *
@@ -353,35 +383,36 @@ public class ScratchLoaderTest
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
-        int len = project.getCombinedScriptLength();
-	project = null;
-        assertEquals(406 , len);
+        int len = project.getTotalScriptLenght();
+        project = null;
+        assertEquals(4, len);
+
     }
 
 
     /**
     * Fail test to check is media files are there.
     *
-    */	
+    */  
     @Test
     public void testMediaCheckFail()
     {
-	try
+        try
         {
-	    String cmdArg = "scratchFiles/Paint with Gobo Fail";
+            String cmdArg = "scratchFiles/Paint with Gobo Fail";
             ScratchLoader loader = new ScratchLoader(cmdArg);
-	    assertFalse(loader.checkMediaReferences(cmdArg));
-	}
-	catch (Exception e)
-	{
+            assertFalse(loader.checkMediaReferences(cmdArg));
+        }
+        catch (Exception e)
+        {
             System.out.println(e);
-	}
+        }
     }
 
     /**
     * Test to unzip a file.
     *
-    */	
+    */  
     @Test
     public void testUnzip()
     {
@@ -403,11 +434,151 @@ public class ScratchLoaderTest
         cmdArg = "scratchFiles";
         loader = new ScratchLoader(cmdArg);
         loader.unzipFile();
-	file = new File("scratchFiles/Animate the Crab");
-	assertTrue(file.exists());
+        file = new File("scratchFiles/Animate the Crab");
+        assertTrue(file.exists());
     }
 
+    /**
+     * Test get Data Variables from one sprite.
+     */
+    
+    @Test
+    public void testGetAllScriptVariables()
+    {
+        String cmdArg = "scratchFiles/Untitled";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        List<Sprite> sprites =  new ArrayList<Sprite>();
+        sprites = project.getListOfSprites();
+        List<DataVariable>  spriteOneVariables = sprites.
+            get(0).getAllScriptVariables();
+        assertEquals(2 , spriteOneVariables.size());
+    }
+    
 
+
+
+    /**
+    * Test to create a Script Object.
+    *
+    */
+    @Test
+    public void testScriptConstructor()
+    {
+    	String content = "[[249,90,[[forward:, 10],"
+                + "[turnRight:, 15],"
+                + "[setVar:to:, all example, 0],"
+                + "[changeVar:by:, all example, 1],"
+                + "[setVar:to:, all example, 0]]],"
+                + "[487,89,"
+                + "[[say:duration:elapsed:from:, Hello!, 2],"
+                + "[showVariable:, all example],"
+                + "[hideVariable:, all example],"
+                + "[setVar:to:, Single example, 0],"
+                + "[showVariable:, Single example]]]]";
+        Script script = new Script(content);
+        assertEquals(Script.class , script.getClass());
+
+    }
+
+    /**
+    * Test to get the Data variables of  
+    * a Script Object.
+    *
+    */
+    @Test
+    public void testGetDataVariables()
+    {
+    	String content = "[[249,90,[[forward:, 10],"
+                + "[turnRight:, 15],"
+                + "[setVar:to:, all example, 0],"
+                + "[changeVar:by:, all example, 1],"
+                + "[setVar:to:, all example, 0]]],"
+                + "[487,89,"
+                + "[[say:duration:elapsed:from:, Hello!, 2],"
+                + "[showVariable:, all example],"
+                + "[hideVariable:, all example],"
+                + "[setVar:to:, Single example, 0],"
+                + "[showVariable:, Single example]]]]";
+        Script script = new Script(content);
+        assertEquals(2 , script.getDataVariables().size());
+
+    }
+
+    /**
+    * Test to get the script content. 
+    *
+    */
+    @Test
+    public void testGetScriptContent()
+    {
+    	String content = "[[249,90,[[forward:, 10],"
+                + "[turnRight:, 15],"
+                + "[setVar:to:, all example, 0],"
+                + "[changeVar:by:, all example, 1],"
+                + "[setVar:to:, all example, 0]]],"
+                + "[487,89,"
+                + "[[say:duration:elapsed:from:, Hello!, 2],"
+                + "[showVariable:, all example],"
+                + "[hideVariable:, all example],"
+                + "[setVar:to:, Single example, 0],"
+                + "[showVariable:, Single example]]]]";
+        Script script = new Script(content);
+        assertEquals(content , script.getScriptContent());
+
+    }
+
+    /**
+    * Test to get category blocks.
+    *
+    */
+    @Test
+    public void testGetCategoryBlocks()
+    {
+    	String content = "[[249,90,[[forward:, 10],"
+                + "[turnRight:, 15],"
+                + "[setVar:to:, all example, 0],"
+                + "[changeVar:by:, all example, 1],"
+                + "[setVar:to:, all example, 0]]],"
+                + "[487,89,"
+                + "[[say:duration:elapsed:from:, Hello!, 2],"
+                + "[showVariable:, all example],"
+                + "[hideVariable:, all example],"
+                + "[setVar:to:, Single example, 0],"
+                + "[showVariable:, Single example]]]]";
+        Script script = new Script(content);
+        assertEquals(8 , script.getCategoryBlocks().size());
+
+    }
+
+    
+    /**
+     * Test get categories and blocks from one sprite.
+     */
+    
+    @Test
+    public void testGetAllScriptcategorys()
+    {
+        String cmdArg = "scratchFiles/Untitled";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        List<Sprite> sprites =  new ArrayList<Sprite>();
+        sprites = project.getListOfSprites();
+        List<String>  spriteOneVariables = sprites.
+            get(0).getAllScriptcategorys();
+        assertEquals(8 , spriteOneVariables.size());
+    }
+
+    /**
+     * Test get categories and blocks from all sprites.
+     */
+    
+    @Test
+    public void testGetAllSprintcategorys()
+    {
+        String cmdArg = "scratchFiles/Untitled";
+        ScratchGrader project = new ScratchGrader(cmdArg);
+        List<String>  spritesVariables = project.getAllSprintcategorys();
+        assertEquals(8 , spritesVariables.size());
+    }
 
     /**
     *Clean up for the test.
@@ -415,7 +586,7 @@ public class ScratchLoaderTest
     @After
     public void cleanUp()
     {
-    	project = null;   
+        project = null;   
     }
 }
 
