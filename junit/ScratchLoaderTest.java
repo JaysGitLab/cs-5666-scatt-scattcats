@@ -383,7 +383,7 @@ public class ScratchLoaderTest
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         ScratchGrader project = new ScratchGrader(cmdArg);
-        int len = project.getTotalScriptLenght();
+        int len = project.getCombinedScriptLength();
         project = null;
         assertEquals(4, len);
 

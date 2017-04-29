@@ -118,7 +118,7 @@ public class Demo
                         + " | " + "Total Scripts: " 
                         + grader.getTotalScriptCount() 
                         + " | " + "Total length of the scripts: " 
-                        + grader.getTotalScriptLenght()
+                        + grader.getCombinedScriptLength()
                         + " | " + "Total Data Varaibles: " 
                         + data.size());
                     for (int j = 0; j < data.size(); j++)
