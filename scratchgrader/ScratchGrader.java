@@ -98,11 +98,11 @@ public class ScratchGrader
     }
 
     /**
-     * getTotalScriptLenght - Get the total lenght between \
-     * all the scripts the of the project.
-     * @return int - total lenght of all scripts
+     * getCombinedScriptLength - Get the combined length of \
+     * all the scripts in the project.
+     * @return int -The total length of all scripts (by number of children).
      */
-    public int getTotalScriptLenght()
+    public int getCombinedScriptLength()
     {
         int count = 0;
         
@@ -115,8 +115,7 @@ public class ScratchGrader
             }
         }
         return count;
-    }
-    
+    }    
     /**
      * getListOfSprites - Get the total list of \
      * sprites.
@@ -223,5 +222,5 @@ public class ScratchGrader
                 
         return categoryBlocks;
     }
-    
 }
+

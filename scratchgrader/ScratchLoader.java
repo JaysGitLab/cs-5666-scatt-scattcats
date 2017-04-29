@@ -198,16 +198,16 @@ public class ScratchLoader
     }
 
    /**
-    * checkMediaReferences - This methos makes 
+    * checkMediaReferences - This method makes 
     * sure that the media references: sound, images
     * exist.
     *
-    *@return boolean - True if all the refences
+    * @param folder -TODO: paramter descriptor.
+    * @return yes -True if all the refences
     * are good.
     */
     
-    public static 
-    boolean checkMediaReferences(String folder)
+    public static boolean checkMediaReferences(String folder)
     {
         Boolean yes = true;
         try
@@ -242,9 +242,9 @@ public class ScratchLoader
                     String[] parts = string.split("\\.");
                     String aux = parts[0]; 
                     String type = parts[1]; 
-                    File f = new File(path + "/" + String.
-                        valueOf(sound.get(i)) + "." + type);
-		    if (!f.exists() && !f.isDirectory()) 
+                    File f = new File(path + "/" 
+                        + String.valueOf(sound.get(i)) + "." + type);
+		            if (!f.exists() && !f.isDirectory()) 
                     { 
                         yes = false;
                         break;
@@ -313,7 +313,6 @@ public class ScratchLoader
                         typeArray[k] = types[k].trim();
                         
                     }
-                
                     for (int j = 0; j < numbersArray.length; j++)
                     {    
                         String string = typeArray[j];
@@ -359,11 +358,11 @@ public class ScratchLoader
                     yes = false;                
                 }
             }
-	}
-	catch (Exception e)
-	{
+	    }
+	    catch (Exception e)
+	    {
             System.out.println(e);
-	}        
+	    }        
         return yes;  
     }
 
@@ -374,8 +373,7 @@ public class ScratchLoader
     */
     public static void unzipFile()
     {
-       
-	List<Path> files = getDirectoryContents(inputFileDirectory);       
+	    List<Path> files = getDirectoryContents(inputFileDirectory);       
         for (int i = 0; i < files.size(); i++)
         {
             String fileName = files.get(i)

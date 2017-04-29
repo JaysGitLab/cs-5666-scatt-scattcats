@@ -311,7 +311,7 @@ public class ScratchLoaderTest
     */
     
     @Test
-    public void testLengthScripts()
+    public void testGetCombinedScriptLength()
     {
         String cmdArg = "scratchFiles/Paint with Gobo";
         File file = new File(cmdArg + "/project.json");       
@@ -332,6 +332,7 @@ public class ScratchLoaderTest
         int length = 1;
         int scriptLength =  scriptsLength.get(0);
         assertEquals(length, scriptLength);
+
     }
 
     /**
@@ -385,6 +386,7 @@ public class ScratchLoaderTest
         int len = project.getTotalScriptLenght();
         project = null;
         assertEquals(4, len);
+
     }
 
 

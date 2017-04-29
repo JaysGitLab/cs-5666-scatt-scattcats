@@ -109,7 +109,6 @@ public class Demo
             {
                 if (loader.checkMediaReferences(file.getAbsolutePath()))
                 {
-                    
                     ScratchGrader grader = new ScratchGrader(
                             file.getAbsolutePath());
                     List<Sprite> sprites =  new ArrayList<Sprite>();
