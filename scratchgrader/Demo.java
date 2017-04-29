@@ -114,7 +114,7 @@ public class Demo
                             file.getAbsolutePath());
                     List<Sprite> sprites =  new ArrayList<Sprite>();
                     sprites = grader.getListOfSprites();
-                    List<DataVariable> data = grader.getAllSpritesVaraibles(); 
+                    List<DataVariable> data = grader.getAllSpritesVariables(); 
                     System.out.println("Project: " + grader.getProjectName() 
                         + " | " + "Total Scripts: " 
                         + grader.getTotalScriptCount() 
@@ -124,14 +124,19 @@ public class Demo
                         + data.size());
                     for (int j = 0; j < data.size(); j++)
                     {
-                        System.out.println("Variables: " + data.get(j).getName()  + " | " + "Uses: " + data.get(j).getUses() +  " | " + "Global: " + data.get(j).getGlobal().toString());
+                        System.out.println("Variables: " + data.get(j).getName()  + 
+                                " | " + "Uses: " + data.
+                                    get(j).getUses() +  " | " 
+                                + "Global: " + data.
+                                    get(j).getGlobal().toString());
                     }
                     
                     List<String>  categoryBlocks = grader.getAllSprintcategorys();
                     
                     for (int j = 0; j < categoryBlocks.size(); j++)
                     {
-                        System.out.println("Category & Uses: " + categoryBlocks.get(j));
+                        System.out.println("Category & Uses: " + 
+                                categoryBlocks.get(j));
                     }
                 }
                  System.out.println("");

@@ -134,24 +134,24 @@ public class ScratchGrader
      * a data variable.
      */
     
-    public List<DataVariable> getAllSpritesVaraibles()
+    public List<DataVariable> getAllSpritesVariables()
     {
         int count = 0;
         int global = 0;
-        List<DataVariable> mockdataVaraibles = new ArrayList<DataVariable>();
-        List<DataVariable> dataVaraibles = new ArrayList<DataVariable>();
+        List<DataVariable> mockdataVariables = new ArrayList<DataVariable>();
+        List<DataVariable> dataVariables = new ArrayList<DataVariable>();
         DataVariable data = null;
         List<String> auxdataVaraibles = new ArrayList<String>();
         Set<String> auxSet = new HashSet<>();
         for (int i = 0; i < this.sprites.size(); i++)
         {
-            dataVaraibles.addAll(sprites.get(i).getAllScriptVaraibles());
+            dataVariables.addAll(sprites.get(i).getAllScriptVariables());
             
         }
         
-        for (int j = 0; j < dataVaraibles.size(); j++)
+        for (int j = 0; j < dataVariables.size(); j++)
         {
-            auxSet.add(dataVaraibles.get(j).getName());
+            auxSet.add(dataVariables.get(j).getName());
             
         }
         
@@ -160,30 +160,36 @@ public class ScratchGrader
         for (int i = 0; i < auxdataVaraibles.size(); i++)
         {
             data = new DataVariable(auxdataVaraibles.get(i),0,false);
-            mockdataVaraibles.add(data);
+            mockdataVariables.add(data);
         }
         
-        for (int i = 0; i < mockdataVaraibles.size(); i++)
+        for (int i = 0; i < mockdataVariables.size(); i++)
         {
-            for (int j = 0; j < dataVaraibles.size(); j++)
+            for (int j = 0; j < dataVariables.size(); j++)
             {
-               if (mockdataVaraibles.get(i).getName().compareTo(dataVaraibles.get(j).getName()) == 0)
+               if (mockdataVariables.get(i).getName().compareTo(dataVariables.get(j).getName()) == 0)
                {
                    global = global + 1;
-                   data = mockdataVaraibles.get(i);
-                   data.setUses(data.getUses() + dataVaraibles.get(j).getUses());
+                   data = mockdataVariables.get(i);
+                   data.setUses(data.getUses() + dataVariables.get(j).getUses());
                    if (global > 1)
                    data.setGlobal(true);
-                   mockdataVaraibles.set(i, data);
+                   mockdataVariables.set(i, data);
                    
                }
             }
             global = 0;
         }
         
-        return mockdataVaraibles;
+        return mockdataVariables;
     }
     
+    /**
+     *  getAllScriptcategorys - Get all the categories and blocks
+     * of all the sprite.
+     * @return List<String> - A list of string each string represent
+     * a category with its blocks and uses.
+     */
     public List<String> getAllSprintcategorys()
     {
         List<String> categoryBlocks = new ArrayList<String>();
@@ -214,8 +220,7 @@ public class ScratchGrader
                 
             }
         }
-        
-        
+                
         return categoryBlocks;
     }
     
