@@ -124,22 +124,26 @@ public class Demo
                         + data.size());
                     for (int j = 0; j < data.size(); j++)
                     {
-                        System.out.println("Variables: " + data.get(j).getName()  + 
-                                " | " + "Uses: " + data.
-                                    get(j).getUses() +  " | " 
-                                + "Global: " + data.
-                                    get(j).getGlobal().toString());
+                        System.out.println("Variables: " 
+                            + data.get(j).getName()  
+                            + " | " + "Uses: " 
+                            + data.get(j).getUses() 
+                            +  " | " 
+                            + "Global: " 
+                            + data.get(j)
+                                .getGlobal().toString());
                     }
                     
-                    List<String>  categoryBlocks = grader.getAllSprintcategorys();
+                    List<String>  categoryBlocks = 
+                        grader.getAllSprintcategorys();
                     
                     for (int j = 0; j < categoryBlocks.size(); j++)
                     {
-                        System.out.println("Category & Uses: " + 
-                                categoryBlocks.get(j));
+                        System.out.println("Category & Uses: " 
+                            + categoryBlocks.get(j));
                     }
                 }
-                 System.out.println("");
+                System.out.println("");
             }
         }
               

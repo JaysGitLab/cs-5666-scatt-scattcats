@@ -322,11 +322,11 @@ public class ScratchLoaderTest
         List<String>  aux =  spriteScripts.get(0);
         Object[]  spriteiScripts = aux.toArray(); 
         List <Script> scripts = new ArrayList<Script>();
-            for (int j = 0; j < spriteiScripts.length; j++)
-            {
-                Script script = new Script(spriteiScripts[j]);
-                scripts.add(script);
-            }
+        for (int j = 0; j < spriteiScripts.length; j++)
+        {
+            Script script = new Script(spriteiScripts[j]);
+            scripts.add(script);
+        }
         Sprite sprite = new Sprite(name, scripts);
         List<Integer> scriptsLength = sprite.lengthScripts();
         int length = 1;
@@ -447,7 +447,8 @@ public class ScratchLoaderTest
         ScratchGrader project = new ScratchGrader(cmdArg);
         List<Sprite> sprites =  new ArrayList<Sprite>();
         sprites = project.getListOfSprites();
-        List<DataVariable>  spriteOneVariables = sprites.get(0).getAllScriptVariables();
+        List<DataVariable>  spriteOneVariables = sprites.
+            get(0).getAllScriptVariables();
         assertEquals(2 , spriteOneVariables.size());
     }
     
@@ -502,7 +503,7 @@ public class ScratchLoaderTest
     }
 
     /**
-    * Test to get the script content 
+    * Test to get the script content. 
     *
     */
     @Test
@@ -525,7 +526,7 @@ public class ScratchLoaderTest
     }
 
     /**
-    * Test to get category blocks
+    * Test to get category blocks.
     *
     */
     @Test
@@ -559,7 +560,8 @@ public class ScratchLoaderTest
         ScratchGrader project = new ScratchGrader(cmdArg);
         List<Sprite> sprites =  new ArrayList<Sprite>();
         sprites = project.getListOfSprites();
-        List<String>  spriteOneVariables = sprites.get(0).getAllScriptcategorys();
+        List<String>  spriteOneVariables = sprites.
+            get(0).getAllScriptcategorys();
         assertEquals(8 , spriteOneVariables.size());
     }
 
