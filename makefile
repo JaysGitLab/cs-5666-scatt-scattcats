@@ -40,7 +40,7 @@ CC = javac $(CLASSPATH) -Xlint:deprecation
 
 default:
 	@echo "usage: make target"
-	@echo "available targets: compile, test, clean"
+	@echo "available targets: compile, style, run, clean, test, jars"
 
 compile: scratchgrader/Demo.class scratchgrader/CategoryMap.class scratchgrader/Script.class scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/DataVariable.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
