@@ -42,7 +42,7 @@ default:
 	@echo "usage: make target"
 	@echo "available targets: compile, style, run, clean, test, jars"
 
-compile: scratchgrader/Demo.class scratchgrader/CategoryMap.class scratchgrader/Script.class scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/DataVariable.class junit/ScratchLoaderTest.class 
+compile: scratchgrader/ScratchGraderUI.class scratchgrader/CategoryMap.class scratchgrader/Script.class scratchgrader/ScratchLoader.class scratchgrader/ScratchGrader.class scratchgrader/Sprite.class scratchgrader/DataVariable.class junit/ScratchLoaderTest.class 
 	@echo "compiled"
 
 junit/ScratchLoaderTest.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(GROOVY_LOCAL) $(PATH_LOCAL) $(SIMPLE_LOCAL) $(ZIP_LOCAL)
@@ -51,10 +51,10 @@ scratchgrader/Demo.class: $(JUNIT_LOCAL) $(COMMON_LOCAL) $(JSONGROOVY_LOCAL) $(G
 
 
 style:
-	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java scratchgrader/ScratchGrader.java scratchgrader/Sprite.java scratchgrader/DataVariable.class scratchgrader/Demo.java
+	checkstyle -c $(STYLE_XML) junit/ScratchLoaderTest.java scratchgrader/ScratchLoader.java scratchgrader/ScratchGrader.java scratchgrader/ScratchGraderUI.java scratchgrader/Sprite.java scratchgrader/DataVariable.class
 
 run:
-	 java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL) scratchgrader.Demo 
+	 java -cp .:$(JUNIT_LOCAL):$(HAMCREST_LOCAL):$(COMMON_LOCAL):$(JSONGROOVY_LOCAL):$(GROOVY_LOCAL):$(PATH_LOCAL):$(SIMPLE_LOCAL):$(ZIP_LOCAL) scratchgrader.ScratchGraderUI 
 
 
 clean:
@@ -62,6 +62,7 @@ clean:
 	rm -f scratchgrader/ScratchGrader.class
 	rm -f scratchgrader/Sprite.class
 	rm -f scratchgrader/Demo.class
+	rm -f scratchgrader/ScratchGraderUI.class
 	rm -f junit/ScratchLoaderTest.class
 	rm -f scratchgrader/DataVariable.class
 	rm -f scratchgrader/CategoryMap.class
