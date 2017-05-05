@@ -7,7 +7,7 @@ This project will allow users to grade scratch files from scratch.mit.edu.
 To be made...
 
 ## How to run
-For the time being the only way to run and test the program if via command line, these are the steps:
+Command run located in the master in case no x11 is intall:
 1.	Pull most recent version of the repository.
 2.	Execute "make compile".
 3.	Execute "make run".
