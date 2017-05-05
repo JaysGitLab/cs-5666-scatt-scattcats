@@ -13,7 +13,7 @@ Command run located in the master in case no x11 is intall:
 3.	Execute "make run".
 4.	The program will give two options: Grade a folder or Exit.
 5.	Choose grade by pressing 1.
-6.	The program will analyze any scratch project in the folder and print: Name of the project, Total count of Scripts, Total length of all the Scripts combine.
+6.	The program will analyze any scratch project in the folder and show different stadistics.
 
 
 ## Authors
